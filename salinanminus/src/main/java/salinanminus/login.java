@@ -2,7 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.salinanminus;
+package salinanminus;
+
+import java.awt.Frame;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import konektor.koneksi;
+import konektor.pegawai;
+import konektor.Tombol;
+
 
 /**
  *
@@ -10,7 +20,6 @@ package com.mycompany.salinanminus;
  */
 public class login extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(login.class.getName());
 
     /**
      * Creates new form login
@@ -35,9 +44,9 @@ public class login extends javax.swing.JFrame {
         nama = new javax.swing.JLabel();
         login = new javax.swing.JButton();
         username = new javax.swing.JTextField();
-        password = new javax.swing.JTextField();
         orang = new javax.swing.JLabel();
         logo = new javax.swing.JLabel();
+        password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -62,7 +71,6 @@ public class login extends javax.swing.JFrame {
 
         username.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        username.setText("USERNAME");
         username.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 204, 255), 2, true));
         username.setSelectedTextColor(new java.awt.Color(0, 0, 0));
         username.setSelectionColor(new java.awt.Color(255, 255, 255));
@@ -80,28 +88,17 @@ public class login extends javax.swing.JFrame {
             }
         });
 
-        password.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        password.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        password.setText("PASSWORD");
-        password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 204, 255), 2));
-        password.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                passwordFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                passwordFocusLost(evt);
-            }
-        });
+        orang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Gambar Virtual.png"))); // NOI18N
+
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Gemini Generate Logo.png"))); // NOI18N
+        logo.setText("jLabel3");
+
+        password.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 204, 255), 2, true));
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordActionPerformed(evt);
             }
         });
-
-        orang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Gambar Virtual.png"))); // NOI18N
-
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Gemini Generate Logo.png"))); // NOI18N
-        logo.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,17 +109,17 @@ public class login extends javax.swing.JFrame {
                 .addComponent(orang, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-                            .addComponent(username)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(215, 215, 215)
                         .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(119, 119, 119)
-                        .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(491, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -136,9 +133,9 @@ public class login extends javax.swing.JFrame {
                         .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(55, 55, 55)
                         .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75)
+                        .addGap(38, 38, 38)
                         .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -157,67 +154,47 @@ public class login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordActionPerformed
-
-    private void passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFocusLost
-        String pass=password.getText();
-        if(pass.equals("") || pass.equals("PASSWORD"))
-        {password.setText("PASSWORD");}
-    }//GEN-LAST:event_passwordFocusLost
-
-    private void passwordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFocusGained
-        String pass=password.getText();
-        if(pass.equals("PASSWORD"))
-        password.setText("");
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordFocusGained
-
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-        String pass=username.getText();
-        if(pass.equals("") || pass.equals("USERNAME"))
-        {username.setText("USERNAME");}
+//        String pass=username.getText();
+//        if(pass.equals("") || pass.equals("USERNAME"))
+//        {username.setText("USERNAME");}
     }//GEN-LAST:event_usernameFocusLost
 
     private void usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusGained
-        String pass=username.getText();
-        if(pass.equals("USERNAME"))
-        username.setText("");
+//        String pass=username.getText();
+//        if(pass.equals("USERNAME"))
+//        username.setText("");
     }//GEN-LAST:event_usernameFocusGained
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
+        System.out.println("Tombol Login diklik!");
+        loginNow();
     }//GEN-LAST:event_loginActionPerformed
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameActionPerformed
 
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+//                new LoginPage().setVisible(true);
+                login lg = new login();
+                lg.setVisible(true);
+                lg.setExtendedState(Frame.MAXIMIZED_BOTH); 
             }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new login().setVisible(true));
+        });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
@@ -225,9 +202,53 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel logo;
     private javax.swing.JLabel nama;
     private javax.swing.JLabel orang;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 
-
+    private void loginNow() {
+        String usr = username.getText();
+        String pwd = new String(password.getPassword());
+        try {
+            Connection K = koneksi.Go();
+            Statement ST = K.createStatement();
+            String Q = "SELECT * FROM pengguna "
+                    + "WHERE "
+                    + "username='"+usr+"' AND "
+                    + "password='"+pwd+"'";
+            ResultSet RS = ST.executeQuery(Q);
+            int n = 0;
+            pegawai pg = new pegawai();
+            while (RS.next()) {                
+                n++;
+                pg.setId(RS.getInt("id_pengguna"));
+                pg.setNama(RS.getString("nama"));
+                pg.setUsername(RS.getString("username"));
+                pg.setJabatan(RS.getString("jabatan"));
+                pg.setPassword(RS.getString("password"));
+            }
+            if(n>0){
+               
+                //System.out.println("Akun ditemukan");
+                this.setVisible(false); 
+                
+                //
+                DashboardAdmin Ds = new DashboardAdmin();
+                Ds.P = pg;
+                Ds.setVisible(true);
+                Ds.setExtendedState(Frame.MAXIMIZED_BOTH); 
+            }else {
+                System.err.println("Akun tidak ditemukan");
+            }
+        } catch (SQLException e) {
+            System.err.println(""
+            + "LOkasi : "+getClass()+""
+            + "Method : @simpanData()"
+            + "Eror : " +e.getMessage());
+//            javax.swing.JOptionPane.showMessageDialog(this, "Terjadi eror pada database:\n" + e.getMessage());
+        }
+        
+        
+    }
 }
+

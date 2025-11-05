@@ -2,13 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.salinanminus;
+package salinanminus;
+
+import java.awt.BorderLayout;
+import java.awt.Frame;
+import javax.swing.JPanel;
+import panel.Manageuser;
+import konektor.pegawai;
 
 /**
  *
  * @author ASUS
  */
 public class Dashboard extends javax.swing.JFrame {
+    pegawai P;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Dashboard.class.getName());
 
@@ -37,6 +44,11 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 255, 255), 5));
@@ -165,6 +177,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+//        AddViews(new Manageusers());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -173,7 +186,16 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        login P = new login();
+        this.setVisible(false); 
+        P.setVisible(true); 
+        P.setExtendedState(Frame.MAXIMIZED_BOTH); 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+//        jLabel1.setText(P.getNama());
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -209,4 +231,13 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel panelContent;
     // End of variables declaration//GEN-END:variables
+    private void AddViews(JPanel P){
+        if(panelContent.getComponentCount() > 0){
+            panelContent.removeAll();
+        }
+        panelContent.add(P, BorderLayout.CENTER);
+        panelContent.revalidate();
+        panelContent.repaint();
+    }
+
 }
