@@ -3,8 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package salinanminus;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import static java.time.Clock.system;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import konektor.koneksi;
+import panel.Manageuser;
 
 /**
  *
@@ -179,4 +185,51 @@ public class AddNewUser extends javax.swing.JDialog {
     private javax.swing.JTextField txtUsername;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
+
+    private void simpanData() {
+        try{
+            String Nama = txtNama.getText();
+            String Jabatan = txtJabatan.getSelectedItem().toString();
+            String Username = txtUsername.getText();
+            String Email = txtEmail.getText();
+            String Password = new String(txtPassword.getPassword());
+            
+            Connection k = koneksi.Go();
+            String sql ="INSERT INTO pegawai"
+                    + "(nama,jabatan,username,email,password"
+                    + "VALUES"
+                    + "(?,?,?,?,?)";
+            PreparedStatement PS = k.prepareStatement(sql);
+            PS.setString(1, Nama);
+            PS.setString(2, Jabatan);
+            PS.setString(3, Username);
+            PS.setString(4, Email);
+            PS.setString(5, Password);
+            PS.executeUpdate();
+            
+            Manageuser.refreshData();
+            this.setVisible(false);
+            
+            JOptionpane.showMessageDialog(null, "Data Berhasil Di Simpan");
+            
+            
+        } catch (Exception e) {
+            System.err.println(""
+                 + "Lokasi: "+getClass()+""
+                 + "Method: @simpanData()"
+                 + "Error: "+e.getMessage());
+            
+        }
+    }
+
+    private static class JOptionpane {
+
+        private static void showMessageDialog(Object object, String data_Berhasil_Di_Simpan) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        public JOptionpane() {
+        }
+    }
+
 }
