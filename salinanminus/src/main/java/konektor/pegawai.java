@@ -10,18 +10,19 @@ package konektor;
  */
 
 public class pegawai {
-    private int id;
+    private int id_pengguna;
     private String nama;
     private String jabatan;
     private String username;
+    private String email;
     private String password;
 
     public int getId() {
-        return id;
+        return id_pengguna;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_pengguna) {
+        this.id_pengguna = id_pengguna;
     }
 
     public String getNama() {
@@ -35,6 +36,10 @@ public class pegawai {
     public String getJabatan() {
         return jabatan;
     }
+    
+    public String getEmail() {
+        return email;
+    }
 
     public void setJabatan(String jabatan) {
         this.jabatan = jabatan;
@@ -46,6 +51,10 @@ public class pegawai {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
