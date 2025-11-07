@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import konektor.koneksi;
 import konektor.pegawai;
-import konektor.Tombol;
 
 
 /**
