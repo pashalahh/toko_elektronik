@@ -5,11 +5,13 @@
 package salinanminus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import static java.time.Clock.system;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import konektor.koneksi;
 import panel.Manageuser;
+
 /**
  *
  * @author LENOVO
@@ -193,52 +195,52 @@ public class AddNewUser extends javax.swing.JDialog {
     private javax.swing.JTextField txtUsername;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
-    
-    private Manageuser managePanel;
 
-    public AddNewUser(java.awt.Frame parent, boolean modal, Manageuser panelRef) {
-        super(parent, modal);
-        initComponents();
-        this.managePanel = panelRef;
-    }
-    
     private void simpanData() {
-        try {
-            String nama = txtNama.getText();
-            String jabatan = txtJabatan.getSelectedItem().toString();
-            String username = txtUsername.getText();
-            String email = txtEmail.getText();
-            String password = new String(txtPassword.getPassword());
+        try{
+            String Nama = txtNama.getText();
+            String Jabatan = txtJabatan.getSelectedItem().toString();
+            String Username = txtUsername.getText();
+            String Email = txtEmail.getText();
+            String Password = new String(txtPassword.getPassword());
             
-            Connection K = koneksi.Go();
-            String sql = "INSERT INTO pegawai "
-                    + "(nama_pegawai,jabatan,username,password_hash) "
-                    + "VALUES "
-                    + "(?,?,?,?)";
-            PreparedStatement PS = K.prepareStatement(sql);
-            PS.setString(1, nama);
-            PS.setString(2, jabatan);
-            PS.setString(3, username);
-            PS.setString(4, email);
-            PS.setString(5, password);
+            Connection k = koneksi.Go();
+            String sql ="INSERT INTO pegawai"
+                    + "(nama,jabatan,username,email,password"
+                    + "VALUES"
+                    + "(?,?,?,?,?)";
+            PreparedStatement PS = k.prepareStatement(sql);
+            PS.setString(1, Nama);
+            PS.setString(2, Jabatan);
+            PS.setString(3, Username);
+            PS.setString(4, Email);
+            PS.setString(5, Password);
             PS.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Data berhasil disimpan");
-            JOptionPane.showMessageDialog(this, "Data berhasil disimpan!");
-
-            if (managePanel != null) {
-                managePanel.refreshData(); // panggil fungsi refresh tabel
-        }
-
-            this.dispose(); 
+            Manageuser.refreshData();
+            this.setVisible(false);
+            
+            JOptionpane.showMessageDialog(null, "Data Berhasil Di Simpan");
+            
             
         } catch (Exception e) {
-            //error handling
             System.err.println(""
-                    + "Lokasi: "+getClass()+""
-                    + "Method: @simpanData()"
-                    + "Error: "+e.getMessage());
+                 + "Lokasi: "+getClass()+""
+                 + "Method: @simpanData()"
+                 + "Error: "+e.getMessage());
+            
         }
     }
+
+    private static class JOptionpane {
+
+        private static void showMessageDialog(Object object, String data_Berhasil_Di_Simpan) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        public JOptionpane() {
+        }
+    }
+
 }
 

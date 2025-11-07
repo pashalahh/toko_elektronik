@@ -107,7 +107,7 @@ public class Manageuser extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        AddNewUser NU = new AddNewUser(null, true, this);
+        AddNewUser NU = new AddNewUser(null, true);
         NU.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
