@@ -103,11 +103,33 @@ public class HapusUser extends javax.swing.JDialog {
             String sql = "DELETE FROM pegawai WHERE "
                     + "id_pegawai=?";
             PreparedStatement PS = K.prepareStatement(sql);
-            PS.setInt()
+            PS.setInt(1,p.getId());
+            PS.executeUpdate();
             
+            //refresh data
+            ManageUser.refreshData("");
+            this.setVisible(false);
+            
+            JOptionPane.showMessageDialog(null,"Berhasil menghapus data");
+            
+        }catch(Exception e) {
+            //error handling
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void formWindowsOpened(java.awt.event.WindowEvent evt) {
+        jButton2.setText(""
+        +"<html>"
+        +"<p>Apakah Anda Yakin Ingin Menghapus data"
+        + " "+p.getNama()+"?</p>"
+        +"</html>"
+        +"");
+        
+    }
+    
+    private void jButton1Actionperformend(java.awt.event.WindowEvent evt) {
+        this.dispose();
+    }
     /**
      * @param args the command line arguments
      */
