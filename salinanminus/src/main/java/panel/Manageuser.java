@@ -5,17 +5,27 @@
 package panel;
 
 import salinanminus.AddNewUser;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+import salinanminus.AddNewUser;
+import konektor.koneksi;
+import konektor.pegawai;
+
 /**
  *
  * @author LENOVO
  */
 public class Manageuser extends javax.swing.JPanel {
-
+    pegawai Px;
     /**
      * Creates new form coba
      */
     public Manageuser() {
         initComponents();
+        
+        refreshData();
     }
 
     /**
@@ -28,24 +38,18 @@ public class Manageuser extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        cari = new javax.swing.JLabel();
-        klmCari = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
+        cari = new javax.swing.JLabel();
+        klmCari = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
         setLayout(new java.awt.BorderLayout());
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        cari.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cari.setText("Cari");
-        jPanel3.add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, 30));
-        jPanel3.add(klmCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 50));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAdd.setText("Tambah");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -53,6 +57,7 @@ public class Manageuser extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
+        jPanel2.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 32, -1, -1));
 
         btnEdit.setText("Edit");
         btnEdit.setEnabled(false);
@@ -61,45 +66,24 @@ public class Manageuser extends javax.swing.JPanel {
                 btnEditActionPerformed(evt);
             }
         });
+        jPanel2.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 32, -1, -1));
 
         btnDelete.setText("Hapus");
         btnDelete.setEnabled(false);
+        jPanel2.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(239, 32, -1, -1));
 
         btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 32, -1, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(btnAdd)
-                .addGap(36, 36, 36)
-                .addComponent(btnEdit)
-                .addGap(36, 36, 36)
-                .addComponent(btnDelete)
-                .addGap(31, 31, 31)
-                .addComponent(btnRefresh)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnEdit)
-                            .addComponent(btnDelete)
-                            .addComponent(btnRefresh)
-                            .addComponent(btnAdd))
-                        .addGap(43, 43, 43))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))))
-        );
+        cari.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cari.setText("Cari");
+        jPanel2.add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, 30));
+        jPanel2.add(klmCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 260, 50));
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -111,6 +95,11 @@ public class Manageuser extends javax.swing.JPanel {
                 "ID", "Nama", "Jabatan", "Username", "Email", "Password"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1, java.awt.BorderLayout.PAGE_END);
@@ -118,13 +107,44 @@ public class Manageuser extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        AddNewUser NU = new AddNewUser(null, true);
+        AddNewUser NU = new AddNewUser(null, true, this);
         NU.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        btnEdit.setEnabled(false);
+        btnDelete.setEnabled(false);
+        jTable1.clearSelection();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int n = jTable1.getSelectedRow();
+        if (n != -1){
+            btnEdit.setEnabled(true);
+            btnAdd.setEnabled(true);
+            //extraksi data
+            Px = new pegawai();
+            String IDuser = jTable1.getValueAt(n, 0).toString();
+            int ID = Integer.valueOf(IDuser);
+            String Nama = jTable1.getValueAt(n, 1).toString();
+            String Jabatan = jTable1.getValueAt(n, 2).toString();
+            String Username = jTable1.getValueAt(n, 3).toString();
+            String Email = jTable1.getValueAt(n, 4).toString();
+            String Password = jTable1.getValueAt(n, 5).toString();
+            Px.setId(ID);
+            Px.setNama(Nama);
+            Px.setJabatan(Jabatan);
+            Px.setUsername(Username);
+            Px.setEmail(Email);
+            Px.setPassword(Password);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -134,11 +154,34 @@ public class Manageuser extends javax.swing.JPanel {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JLabel cari;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private static javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private static javax.swing.JTable jTable1;
     private javax.swing.JTextField klmCari;
     // End of variables declaration//GEN-END:variables
 
-      
+        public static void refreshData(){
+            try {
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                for (int i = model.getRowCount()-1; i >=0; i--) {
+                    model.removeRow(i); 
+                }
+
+                Connection K = koneksi.Go();
+                String Q = "SELECT * FROM pengguna";
+                Statement S = K.createStatement();
+                ResultSet R = S.executeQuery(Q);
+                while (R.next()){                
+                    int id = R.getInt("id_pengguna");
+                    String nama = R.getString("nama");
+                    String jabatan = R.getString("jabatan");
+                    String username = R.getString("username");
+                    String email = R.getString("email");
+                    String password = R.getString("password");
+                    Object[] datausers = {id,nama,jabatan,username,email,password};
+                    model.addRow(datausers); 
+                }
+            
+            } catch (Exception e) {
+            }
+    }
 }
