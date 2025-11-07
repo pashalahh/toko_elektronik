@@ -3,9 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package salinanminus;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.JOptionPane;
+import konektor.koneksi;
+import panel.Manageuser;
 /**
  *
  * @author LENOVO
@@ -104,6 +108,11 @@ public class AddNewUser extends javax.swing.JDialog {
 
         btnSimpan.setBackground(new java.awt.Color(153, 255, 153));
         btnSimpan.setText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Premium Vector _ HUD, UI, GUI futuristic user interface screen elements_ High tech screen.jpg"))); // NOI18N
@@ -125,6 +134,11 @@ public class AddNewUser extends javax.swing.JDialog {
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        // TODO add your handling code here:
+        simpanData();
+    }//GEN-LAST:event_btnSimpanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,4 +193,52 @@ public class AddNewUser extends javax.swing.JDialog {
     private javax.swing.JTextField txtUsername;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
+    
+    private Manageuser managePanel;
+
+    public AddNewUser(java.awt.Frame parent, boolean modal, Manageuser panelRef) {
+        super(parent, modal);
+        initComponents();
+        this.managePanel = panelRef;
+    }
+    
+    private void simpanData() {
+        try {
+            String nama = txtNama.getText();
+            String jabatan = txtJabatan.getSelectedItem().toString();
+            String username = txtUsername.getText();
+            String email = txtEmail.getText();
+            String password = new String(txtPassword.getPassword());
+            
+            Connection K = koneksi.Go();
+            String sql = "INSERT INTO pegawai "
+                    + "(nama_pegawai,jabatan,username,password_hash) "
+                    + "VALUES "
+                    + "(?,?,?,?)";
+            PreparedStatement PS = K.prepareStatement(sql);
+            PS.setString(1, nama);
+            PS.setString(2, jabatan);
+            PS.setString(3, username);
+            PS.setString(4, email);
+            PS.setString(5, password);
+            PS.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Data berhasil disimpan");
+            JOptionPane.showMessageDialog(this, "Data berhasil disimpan!");
+
+            if (managePanel != null) {
+                managePanel.refreshData(); // panggil fungsi refresh tabel
+        }
+
+            this.dispose(); 
+            
+        } catch (Exception e) {
+            //error handling
+            System.err.println(""
+                    + "Lokasi: "+getClass()+""
+                    + "Method: @simpanData()"
+                    + "Error: "+e.getMessage());
+        }
+    }
 }
+
