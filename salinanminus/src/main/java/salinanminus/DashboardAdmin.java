@@ -74,9 +74,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         nama.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         nama.setForeground(new java.awt.Color(255, 255, 255));
-        nama.setText("Nama");
+        nama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nama.setText("nama");
         jPanel2.add(nama);
-        nama.setBounds(1280, 70, 110, 30);
+        nama.setBounds(1220, 70, 240, 30);
 
         btnLogout.setBackground(new java.awt.Color(255, 0, 51));
         btnLogout.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
@@ -144,7 +145,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-         bgatas.setText(P.getNama());
+         nama.setText(P.getUsername());
     }//GEN-LAST:event_formWindowOpened
 
     /**

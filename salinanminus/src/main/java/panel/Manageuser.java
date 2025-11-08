@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import salinanminus.AddNewUser;
 import konektor.koneksi;
 import konektor.pegawai;
+import salinanminus.editUser;
+import salinanminus.HapusUser;
 
 /**
  *
@@ -25,7 +27,7 @@ public class Manageuser extends javax.swing.JPanel {
     public Manageuser() {
         initComponents();
         
-        refreshData();
+        refreshData("");
     }
 
     /**
@@ -70,6 +72,11 @@ public class Manageuser extends javax.swing.JPanel {
 
         btnDelete.setText("Hapus");
         btnDelete.setEnabled(false);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(239, 32, -1, -1));
 
         btnRefresh.setText("Refresh");
@@ -83,6 +90,12 @@ public class Manageuser extends javax.swing.JPanel {
         cari.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         cari.setText("Cari");
         jPanel2.add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, 30));
+
+        klmCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                klmCariKeyReleased(evt);
+            }
+        });
         jPanel2.add(klmCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 260, 50));
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -113,6 +126,13 @@ public class Manageuser extends javax.swing.JPanel {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
+        if(jTable1.getSelectedRow() != -1){
+            editUser em = new editUser(null, true);
+            em.P = Px;
+            em.setVisible(true); 
+        }else {
+            
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
@@ -120,6 +140,7 @@ public class Manageuser extends javax.swing.JPanel {
         btnEdit.setEnabled(false);
         btnDelete.setEnabled(false);
         jTable1.clearSelection();
+        
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -127,7 +148,7 @@ public class Manageuser extends javax.swing.JPanel {
         int n = jTable1.getSelectedRow();
         if (n != -1){
             btnEdit.setEnabled(true);
-            btnAdd.setEnabled(true);
+            btnDelete.setEnabled(true);
             //extraksi data
             Px = new pegawai();
             String IDuser = jTable1.getValueAt(n, 0).toString();
@@ -146,6 +167,19 @@ public class Manageuser extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        HapusUser hu = new HapusUser(null, true);
+        hu.p = Px;
+        hu.setVisible(true);
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void klmCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_klmCariKeyReleased
+        // TODO add your handling code here:
+        searchDataUser();
+    }//GEN-LAST:event_klmCariKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -159,29 +193,44 @@ public class Manageuser extends javax.swing.JPanel {
     private javax.swing.JTextField klmCari;
     // End of variables declaration//GEN-END:variables
 
-        public static void refreshData(){
-            try {
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                for (int i = model.getRowCount()-1; i >=0; i--) {
-                    model.removeRow(i); 
-                }
-
-                Connection K = koneksi.Go();
-                String Q = "SELECT * FROM pengguna";
-                Statement S = K.createStatement();
-                ResultSet R = S.executeQuery(Q);
-                while (R.next()){                
-                    int id = R.getInt("id_pengguna");
-                    String nama = R.getString("nama");
-                    String jabatan = R.getString("jabatan");
-                    String username = R.getString("username");
-                    String email = R.getString("email");
-                    String password = R.getString("password");
-                    Object[] datausers = {id,nama,jabatan,username,email,password};
-                    model.addRow(datausers); 
-                }
-            
-            } catch (Exception e) {
+    public static void refreshData(String string){
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            for (int i = model.getRowCount()-1; i >=0; i--) {
+                model.removeRow(i); 
             }
+
+            Connection K = koneksi.Go();
+            String Q = "SELECT * FROM pengguna";
+            Statement S = K.createStatement();
+            ResultSet R = S.executeQuery(Q);
+            while (R.next()){                
+                int id = R.getInt("id_pengguna");
+                String nama = R.getString("nama");
+                String jabatan = R.getString("jabatan");
+                String username = R.getString("username");
+                String email = R.getString("email");
+                String password = R.getString("password");
+                Object[] datausers = {id,nama,jabatan,username,email,password};
+                model.addRow(datausers); 
+            }
+            
+        } catch (Exception e) {
+        }
+    }
+
+
+    private void searchDataUser() {
+        String key = cari.getText();
+        String where = " WHERE "
+                + "id_pegawai LIKE '%" + key + "%' OR "
+                + "nama LIKE '%" + key + "%' OR "
+                + "jabatan LIKE '%" + key + "%' OR "
+                + "username LIKE '%" + key + "%' OR "
+                + "password LIKE '%" + key + "%'";
+
+        System.out.println("String WHERE yang dibuat: " + where);
+        refreshData(where);
     }
 }
+

@@ -4,17 +4,29 @@
  */
 package salinanminus;
 
+import konektor.koneksi;
+import konektor.pegawai;
+import panel.Manageuser;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
+
 /**
+
  *
  * @author yusuf
  */
 public class editUser extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(editUser.class.getName());
+    
+    public pegawai P;
 
     /**
      * Creates new form editUser
-     */
+     */ 
     public editUser(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -37,19 +49,21 @@ public class editUser extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         nama = new javax.swing.JLabel();
         jabatan = new javax.swing.JLabel();
         username1 = new javax.swing.JLabel();
         email1 = new javax.swing.JLabel();
         password1 = new javax.swing.JLabel();
         txtNama1 = new javax.swing.JTextField();
-        txtNama2 = new javax.swing.JTextField();
         txtJabatan = new javax.swing.JComboBox<>();
-        txtNama4 = new javax.swing.JTextField();
-        txtNama = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
         btnBatal = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Premium Vector _ HUD, UI, GUI futuristic user interface screen elements_ High tech screen.jpg"))); // NOI18N
 
@@ -75,132 +89,94 @@ public class editUser extends javax.swing.JDialog {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Premium Vector _ HUD, UI, GUI futuristic user interface screen elements_ High tech screen.jpg"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 255));
+        jLabel1.setText("MINUS ELECTRIC");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
 
         nama.setForeground(new java.awt.Color(255, 255, 255));
         nama.setText("Nama");
+        jPanel1.add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 56, -1));
 
         jabatan.setForeground(new java.awt.Color(255, 255, 255));
         jabatan.setText("Jabatan");
+        jPanel1.add(jabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 56, -1));
 
         username1.setForeground(new java.awt.Color(255, 255, 255));
         username1.setText("Username");
+        jPanel1.add(username1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 90, -1));
 
         email1.setForeground(new java.awt.Color(255, 255, 255));
         email1.setText("Email");
+        jPanel1.add(email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 56, -1));
 
         password1.setForeground(new java.awt.Color(255, 255, 255));
         password1.setText("Password");
+        jPanel1.add(password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 90, -1));
 
         txtNama1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNama1ActionPerformed(evt);
             }
         });
-
-        txtNama2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNama2ActionPerformed(evt);
-            }
-        });
+        jPanel1.add(txtNama1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 240, -1));
 
         txtJabatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Kasir" }));
-
-        txtNama4.addActionListener(new java.awt.event.ActionListener() {
+        txtJabatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNama4ActionPerformed(evt);
+                txtJabatanActionPerformed(evt);
             }
         });
+        jPanel1.add(txtJabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 240, -1));
 
-        txtNama.addActionListener(new java.awt.event.ActionListener() {
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNamaActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 240, -1));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Premium Vector _ HUD, UI, GUI futuristic user interface screen elements_ High tech screen.jpg"))); // NOI18N
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 240, -1));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 240, -1));
 
         btnBatal.setBackground(new java.awt.Color(255, 0, 0));
+        btnBatal.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBatal.setForeground(new java.awt.Color(255, 255, 255));
         btnBatal.setText("Batal");
+        btnBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBatalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, -1, -1));
 
         btnEdit.setBackground(new java.awt.Color(153, 255, 153));
-        btnEdit.setText("Edit");
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEdit.setText("Simpan");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(btnBatal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEdit))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(159, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jabatan, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                                .addComponent(txtJabatan, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(username1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtNama4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(email1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtNama2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(password1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtNama1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(105, 105, 105))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nama))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtJabatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jabatan))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNama4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(username1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNama2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(email1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(password1)
-                    .addComponent(txtNama1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBatal)
-                    .addComponent(btnEdit))
-                .addGap(21, 21, 21))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Premium Vector _ HUD, UI, GUI futuristic user interface screen elements_ High tech screen.jpg"))); // NOI18N
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 390));
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -213,17 +189,36 @@ public class editUser extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNama1ActionPerformed
 
-    private void txtNama2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNama2ActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNama2ActionPerformed
+    }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void txtNama4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNama4ActionPerformed
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNama4ActionPerformed
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
-    private void txtNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaActionPerformed
+    private void txtJabatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJabatanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNamaActionPerformed
+    }//GEN-LAST:event_txtJabatanActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        edituser();
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        txtNama1.setText(P.getNama());
+        txtJabatan.setSelectedItem(P.getJabatan());
+        txtUsername.setText(P.getUsername());
+        txtEmail.setText(P.getEmail());
+        txtPassword.setText(P.getPassword()); 
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnBatalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,22 +262,60 @@ public class editUser extends javax.swing.JDialog {
     private javax.swing.JButton btnEdit;
     private javax.swing.JLabel email;
     private javax.swing.JLabel email1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jabatan;
     private javax.swing.JLabel nama;
     private javax.swing.JLabel password;
     private javax.swing.JLabel password1;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JComboBox<String> txtJabatan;
-    private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtNama1;
-    private javax.swing.JTextField txtNama2;
-    private javax.swing.JTextField txtNama4;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUsername;
     private javax.swing.JTextField txtUsername2;
     private javax.swing.JLabel username;
     private javax.swing.JLabel username1;
     // End of variables declaration//GEN-END:variables
+
+    private void edituser() {
+        try {
+            String nama = txtNama1.getText();
+            String jabatan = txtJabatan.getSelectedItem().toString();
+            String username = txtUsername.getText();
+            String email = txtEmail.getText();
+            String password = new String(txtPassword.getPassword());
+            
+            String Q = "UPDATE pengguna SET "
+                    + "nama=?, "
+                    + "jabatan=?, "
+                    + "username=?, "
+                    + "email=?, "
+                    + "password=? "
+                    + "WHERE "
+                    + "id_pengguna=?";
+            Connection C = koneksi.Go();
+            PreparedStatement PS = C.prepareStatement(Q);
+            PS.setString(1, nama);
+            PS.setString(2, jabatan);
+            PS.setString(3, username);
+            PS.setString(4, email);
+            PS.setString(5, password);
+            PS.setInt(6, P.getId());
+            PS.executeUpdate();
+            
+            //refresh data
+            Manageuser.refreshData("");
+            this.setVisible(false); 
+            
+            JOptionPane.showMessageDialog(null, "Berhasil merubah data"); 
+        } catch (SQLException e) {
+            System.err.println("Error:@simpanData() => "+e.getMessage());
+        }
+    }
 }

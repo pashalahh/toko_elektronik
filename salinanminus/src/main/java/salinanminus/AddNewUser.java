@@ -6,9 +6,9 @@ package salinanminus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import static java.time.Clock.system;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import konektor.koneksi;
 import panel.Manageuser;
 
@@ -39,6 +39,7 @@ public class AddNewUser extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         nama = new javax.swing.JLabel();
         jabatan = new javax.swing.JLabel();
         username = new javax.swing.JLabel();
@@ -58,64 +59,76 @@ public class AddNewUser extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 255));
+        jLabel1.setText("MINUS ELECTRIC");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
+
         nama.setForeground(new java.awt.Color(255, 255, 255));
         nama.setText("Nama");
-        jPanel1.add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 56, -1));
+        jPanel1.add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 56, -1));
 
         jabatan.setForeground(new java.awt.Color(255, 255, 255));
         jabatan.setText("Jabatan");
-        jPanel1.add(jabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 56, -1));
+        jPanel1.add(jabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 56, -1));
 
         username.setForeground(new java.awt.Color(255, 255, 255));
         username.setText("Username");
-        jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 56, -1));
+        jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 90, -1));
 
         email.setForeground(new java.awt.Color(255, 255, 255));
         email.setText("Email");
-        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 56, -1));
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 56, -1));
 
         password.setForeground(new java.awt.Color(255, 255, 255));
         password.setText("Password");
-        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 56, -1));
+        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 90, -1));
 
         txtNama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNamaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 240, -1));
+        jPanel1.add(txtNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 240, -1));
 
         txtJabatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Kasir" }));
-        jPanel1.add(txtJabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 240, -1));
+        jPanel1.add(txtJabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 240, -1));
 
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
             }
         });
-        jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 240, -1));
+        jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 240, -1));
 
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
             }
         });
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 210, 240, -1));
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 240, -1));
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 240, -1));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 240, -1));
 
         btnBatal.setBackground(new java.awt.Color(255, 0, 0));
+        btnBatal.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBatal.setForeground(new java.awt.Color(255, 255, 255));
         btnBatal.setText("Batal");
+        btnBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBatalActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, -1, -1));
 
         btnSimpan.setBackground(new java.awt.Color(153, 255, 153));
+        btnSimpan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSimpan.setText("Simpan");
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, -1, -1));
+        jPanel1.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Premium Vector _ HUD, UI, GUI futuristic user interface screen elements_ High tech screen.jpg"))); // NOI18N
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 390));
@@ -141,6 +154,11 @@ public class AddNewUser extends javax.swing.JDialog {
         // TODO add your handling code here:
         simpanData();
     }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnBatalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,6 +201,7 @@ public class AddNewUser extends javax.swing.JDialog {
     private javax.swing.JButton btnBatal;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JLabel email;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jabatan;
@@ -205,10 +224,10 @@ public class AddNewUser extends javax.swing.JDialog {
             String Password = new String(txtPassword.getPassword());
             
             Connection k = koneksi.Go();
-            String sql ="INSERT INTO pegawai"
-                    + "(nama,jabatan,username,email,password"
+            String sql ="INSERT INTO pengguna"
+                    + "(nama,jabatan,username,email,password)"
                     + "VALUES"
-                    + "(?,?,?,?,?)";
+                    + "(?,?,?,?,?)";          
             PreparedStatement PS = k.prepareStatement(sql);
             PS.setString(1, Nama);
             PS.setString(2, Jabatan);
@@ -217,12 +236,13 @@ public class AddNewUser extends javax.swing.JDialog {
             PS.setString(5, Password);
             PS.executeUpdate();
             
-            Manageuser.refreshData();
+            Manageuser.refreshData("");
             this.setVisible(false);
             
-            JOptionpane.showMessageDialog(null, "Data Berhasil Di Simpan");
             
+            JOptionPane.showMessageDialog(null, "Data Berhasil Di Simpan!");
             
+     
         } catch (Exception e) {
             System.err.println(""
                  + "Lokasi: "+getClass()+""
@@ -231,16 +251,5 @@ public class AddNewUser extends javax.swing.JDialog {
             
         }
     }
-
-    private static class JOptionpane {
-
-        private static void showMessageDialog(Object object, String data_Berhasil_Di_Simpan) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-
-        public JOptionpane() {
-        }
-    }
-
 }
 
