@@ -4,16 +4,16 @@
  */
 package panel;
 
-import salinanminus.AddNewUser;
+import dialogs.AddNewUser;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
-import salinanminus.AddNewUser;
+import dialogs.AddNewUser;
 import konektor.koneksi;
 import konektor.pegawai;
-import salinanminus.editUser;
-import salinanminus.HapusUser;
+import dialogs.editUser;
+import dialogs.HapusUser;
 
 /**
  *

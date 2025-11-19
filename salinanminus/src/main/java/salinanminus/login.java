@@ -153,15 +153,11 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
-//        String pass=username.getText();
-//        if(pass.equals("") || pass.equals("USERNAME"))
-//        {username.setText("USERNAME");}
+
     }//GEN-LAST:event_usernameFocusLost
 
     private void usernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusGained
-//        String pass=username.getText();
-//        if(pass.equals("USERNAME"))
-//        username.setText("");
+
     }//GEN-LAST:event_usernameFocusGained
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
@@ -243,7 +239,7 @@ public class login extends javax.swing.JFrame {
             + "LOkasi : "+getClass()+""
             + "Method : @simpanData()"
             + "Eror : " +e.getMessage());
-//            javax.swing.JOptionPane.showMessageDialog(this, "Terjadi eror pada database:\n" + e.getMessage());
+
         }
         
         
