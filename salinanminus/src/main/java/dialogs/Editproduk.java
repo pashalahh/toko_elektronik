@@ -4,6 +4,13 @@
  */
 package dialogs;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import konektor.koneksi;
+import panel.Manageuser;
+
 /**
  *
  * @author yusuf
@@ -237,4 +244,48 @@ public class Editproduk extends javax.swing.JDialog {
     private javax.swing.JTextField txtUsername;
     private javax.swing.JLabel username1;
     // End of variables declaration//GEN-END:variables
+ private void editproduk() {
+        try{
+            String Nama = txtNama1.getText();
+            String Jabatan = txtJabatan.getSelectedItem().toString();
+            String Username = txtUsername.getText();
+            String Email = txtEmail.getText();
+            String Password = new String(txtPassword.getPassword());
+            
+            Connection k = koneksi.Go();
+            String sql ="INSERT INTO pengguna"
+                    + "(nama,jabatan,username,email,password)"
+                    + "VALUES"
+                    + "(?,?,?,?,?)";          
+            PreparedStatement PS = k.prepareStatement(sql);
+            PS.setString(1, Nama);
+            PS.setString(2, Jabatan);
+            PS.setString(3, Username);
+            PS.setString(4, Email);
+            PS.setString(5, Password);
+            PS.executeUpdate();
+            
+            Manageuser.refreshData("");
+            this.setVisible(false);
+            
+            
+            JOptionPane.showMessageDialog(null, "Data Berhasil Di Edit!");
+            
+     
+        } catch (Exception e) {
+            System.err.println(""
+                 + "Lokasi: "+getClass()+""
+                 + "Method: @Editproduk()"
+                 + "Error: "+e.getMessage());
+            
+        }
+    }
+
+    private static class txtNama1 {
+
+        public txtNama1() {
+        }
+    }
 }
+
+
