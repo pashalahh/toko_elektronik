@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package salinanminus;
-
+import javax.swing.JFrame;
 /**
  *
  * @author bolem
@@ -17,6 +17,9 @@ public class DashboardKasir extends javax.swing.JFrame {
      */
     public DashboardKasir() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
+        pack();
     }
 
     /**
@@ -36,7 +39,6 @@ public class DashboardKasir extends javax.swing.JFrame {
         logo = new javax.swing.JLabel();
         bgatas = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        btnKelola = new javax.swing.JButton();
         btnKelola1 = new javax.swing.JButton();
         btnKelola2 = new javax.swing.JButton();
         bgside = new javax.swing.JLabel();
@@ -45,7 +47,6 @@ public class DashboardKasir extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         jPanel2.setLayout(null);
 
         minus.setBackground(new java.awt.Color(255, 255, 255));
@@ -80,20 +81,11 @@ public class DashboardKasir extends javax.swing.JFrame {
 
         bgatas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg atas.jpg"))); // NOI18N
         jPanel2.add(bgatas);
-        bgatas.setBounds(-3, -4, 1580, 240);
+        bgatas.setBounds(0, 0, 1580, 240);
 
         jPanel3.setLayout(null);
 
-        btnKelola.setText("Kasir (Pembelian)");
-        btnKelola.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKelolaActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnKelola);
-        btnKelola.setBounds(60, 150, 150, 50);
-
-        btnKelola1.setText("Kelola Data User");
+        btnKelola1.setText("Transaksi");
         btnKelola1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKelola1ActionPerformed(evt);
@@ -102,7 +94,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         jPanel3.add(btnKelola1);
         btnKelola1.setBounds(60, 10, 150, 50);
 
-        btnKelola2.setText("Kelola Data Produk");
+        btnKelola2.setText("Riwayat Transaksi");
         btnKelola2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKelola2ActionPerformed(evt);
@@ -156,11 +148,15 @@ public class DashboardKasir extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 50, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 15, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 979, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -171,13 +167,8 @@ public class DashboardKasir extends javax.swing.JFrame {
         login P = new login();
         this.setVisible(false);
         P.setVisible(true);
-        P.setExtendedState(Frame.MAXIMIZED_BOTH);
+        P.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_btnLogoutActionPerformed
-
-    private void btnKelolaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelolaActionPerformed
-        // TODO add your handling code here:
-        AddViews(new Manageuser());
-    }//GEN-LAST:event_btnKelolaActionPerformed
 
     private void btnKelola1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelola1ActionPerformed
         // TODO add your handling code here:
@@ -215,7 +206,6 @@ public class DashboardKasir extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bgatas;
     private javax.swing.JLabel bgside;
-    private javax.swing.JButton btnKelola;
     private javax.swing.JButton btnKelola1;
     private javax.swing.JButton btnKelola2;
     private javax.swing.JButton btnLogout;
