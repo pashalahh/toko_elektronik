@@ -3,32 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package salinanminus;
-
-import java.awt.BorderLayout;
-import java.awt.Frame;
-import javax.swing.JPanel;
-import panel.Manageuser;
-import konektor.pegawai;
-
+import javax.swing.JFrame;
 /**
  *
- * @author LENOVO
+ * @author bolem
  */
-public class DashboardAdmin extends javax.swing.JFrame {
-    pegawai P;
+public class DashboardKasir extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardAdmin.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardKasir.class.getName());
 
     /**
-     * Creates new form DashboardAdmin
+     * Creates new form DashboardKasir
      */
-    public DashboardAdmin() {
+    public DashboardKasir() {
         initComponents();
-        this.setExtendedState(Frame.MAXIMIZED_BOTH); // agar layar penuh
-        this.setResizable(true);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
+        pack();
     }
-    
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,7 +31,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         minus = new javax.swing.JLabel();
         nama = new javax.swing.JLabel();
@@ -47,7 +39,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
         logo = new javax.swing.JLabel();
         bgatas = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        btnKelola = new javax.swing.JButton();
         btnKelola1 = new javax.swing.JButton();
         btnKelola2 = new javax.swing.JButton();
         bgside = new javax.swing.JLabel();
@@ -55,16 +46,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         jPanel2.setLayout(null);
 
         minus.setBackground(new java.awt.Color(255, 255, 255));
@@ -99,22 +81,11 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         bgatas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg atas.jpg"))); // NOI18N
         jPanel2.add(bgatas);
-        bgatas.setBounds(-3, -4, 1580, 240);
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 1570, 240));
+        bgatas.setBounds(0, 0, 1580, 240);
 
         jPanel3.setLayout(null);
 
-        btnKelola.setText("Kasir (Pembelian)");
-        btnKelola.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKelolaActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnKelola);
-        btnKelola.setBounds(60, 150, 150, 50);
-
-        btnKelola1.setText("Kelola Data User");
+        btnKelola1.setText("Transaksi");
         btnKelola1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKelola1ActionPerformed(evt);
@@ -123,7 +94,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jPanel3.add(btnKelola1);
         btnKelola1.setBounds(60, 10, 150, 50);
 
-        btnKelola2.setText("Kelola Data Produk");
+        btnKelola2.setText("Riwayat Transaksi");
         btnKelola2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKelola2ActionPerformed(evt);
@@ -136,37 +107,68 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jPanel3.add(bgside);
         bgside.setBounds(0, 0, 280, 710);
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 270, 540));
-
-        jPanel4.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jPanel4.setLayout(new java.awt.BorderLayout());
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 1230, 580));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/1600bg.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1570, 980));
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(280, 280, 280)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1570, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(292, 292, 292)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(272, 272, 272)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 50, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 15, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 979, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnKelolaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelolaActionPerformed
-        // TODO add your handling code here:
-        AddViews(new Manageuser());
-    }//GEN-LAST:event_btnKelolaActionPerformed
-
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
         login P = new login();
-        this.setVisible(false); 
-        P.setVisible(true); 
-        P.setExtendedState(Frame.MAXIMIZED_BOTH); 
+        this.setVisible(false);
+        P.setVisible(true);
+        P.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_btnLogoutActionPerformed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-         nama.setText(P.getUsername());
-    }//GEN-LAST:event_formWindowOpened
 
     private void btnKelola1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelola1ActionPerformed
         // TODO add your handling code here:
@@ -198,34 +200,22 @@ public class DashboardAdmin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new DashboardAdmin().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new DashboardKasir().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bgatas;
     private javax.swing.JLabel bgside;
-    private javax.swing.JButton btnKelola;
     private javax.swing.JButton btnKelola1;
     private javax.swing.JButton btnKelola2;
     private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel minus;
     private javax.swing.JLabel nama;
     // End of variables declaration//GEN-END:variables
-
-     private void AddViews(JPanel P){
-        if(jPanel4.getComponentCount() > 0){
-            jPanel4.removeAll();
-        }
-        jPanel4.add(P, BorderLayout.CENTER);
-        jPanel4.revalidate();
-        jPanel4.repaint();
-    }
-
-
 }
