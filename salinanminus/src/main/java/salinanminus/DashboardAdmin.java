@@ -48,7 +48,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         bgatas = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnKelola = new javax.swing.JButton();
-        btnKelola1 = new javax.swing.JButton();
+        btnKasir = new javax.swing.JButton();
         btnKelola2 = new javax.swing.JButton();
         bgside = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -105,23 +105,23 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         jPanel3.setLayout(null);
 
-        btnKelola.setText("Kasir (Pembelian)");
+        btnKelola.setText("Kelola Data User");
         btnKelola.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKelolaActionPerformed(evt);
             }
         });
         jPanel3.add(btnKelola);
-        btnKelola.setBounds(60, 150, 150, 50);
+        btnKelola.setBounds(60, 0, 150, 50);
 
-        btnKelola1.setText("Kelola Data User");
-        btnKelola1.addActionListener(new java.awt.event.ActionListener() {
+        btnKasir.setText("Kasir (Pembelian)");
+        btnKasir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKelola1ActionPerformed(evt);
+                btnKasirActionPerformed(evt);
             }
         });
-        jPanel3.add(btnKelola1);
-        btnKelola1.setBounds(60, 10, 150, 50);
+        jPanel3.add(btnKasir);
+        btnKasir.setBounds(60, 160, 150, 50);
 
         btnKelola2.setText("Kelola Data Produk");
         btnKelola2.addActionListener(new java.awt.event.ActionListener() {
@@ -168,9 +168,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
          nama.setText(P.getUsername());
     }//GEN-LAST:event_formWindowOpened
 
-    private void btnKelola1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelola1ActionPerformed
+    private void btnKasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKasirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnKelola1ActionPerformed
+    }//GEN-LAST:event_btnKasirActionPerformed
 
     private void btnKelola2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelola2ActionPerformed
         // TODO add your handling code here:
@@ -204,8 +204,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bgatas;
     private javax.swing.JLabel bgside;
+    private javax.swing.JButton btnKasir;
     private javax.swing.JButton btnKelola;
-    private javax.swing.JButton btnKelola1;
     private javax.swing.JButton btnKelola2;
     private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel1;
