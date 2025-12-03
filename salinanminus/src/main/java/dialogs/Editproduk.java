@@ -179,7 +179,7 @@ public class Editproduk extends javax.swing.JDialog {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-        edituser();
+//        edituser();
     }//GEN-LAST:event_btnEditActionPerformed
 
     /**
