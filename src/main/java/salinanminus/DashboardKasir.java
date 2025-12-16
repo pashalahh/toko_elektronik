@@ -49,7 +49,6 @@ public class DashboardKasir extends javax.swing.JFrame {
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         jPanel2.setLayout(null);
 
         minus.setBackground(new java.awt.Color(255, 255, 255));
@@ -86,7 +85,7 @@ public class DashboardKasir extends javax.swing.JFrame {
         jPanel2.add(bgatas);
         bgatas.setBounds(0, 0, 1580, 240);
 
-        jPanel5.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 6, 1570, 240));
+        jPanel5.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1570, 240));
 
         jPanel3.setLayout(null);
 
@@ -112,13 +111,13 @@ public class DashboardKasir extends javax.swing.JFrame {
         jPanel3.add(bgside);
         bgside.setBounds(0, 0, 280, 710);
 
-        jPanel5.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 298, 270, 540));
+        jPanel5.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 298, 270, 540));
 
         jPanel4.setLayout(new java.awt.BorderLayout());
-        jPanel5.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 278, 1230, 580));
+        jPanel5.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 278, 1230, 580));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/1600bg.jpg"))); // NOI18N
-        jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 8, 1570, 980));
+        jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 8, 1570, 980));
 
         getContentPane().add(jPanel5, java.awt.BorderLayout.CENTER);
 
