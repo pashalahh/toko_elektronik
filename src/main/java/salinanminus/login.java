@@ -221,19 +221,41 @@ public class login extends javax.swing.JFrame {
                 pg.setJabatan(RS.getString("jabatan"));
                 pg.setPassword(RS.getString("password"));
             }
-            if(n>0){
-               
-                //System.out.println("Akun ditemukan");
-                this.setVisible(false); 
-                
-                //
-                DashboardAdmin Ds = new DashboardAdmin();
-                Ds.P = pg;
-                Ds.setVisible(true);
-                Ds.setExtendedState(Frame.MAXIMIZED_BOTH); 
-            }else {
-                System.err.println("Akun tidak ditemukan");
-            }
+            if (n > 0) {
+
+    this.setVisible(false);
+
+    String jabatan = pg.getJabatan().toLowerCase();
+
+    if (jabatan.equals("admin")) {
+
+        DashboardAdmin da = new DashboardAdmin();
+        da.P = pg;
+        da.setVisible(true);
+        da.setExtendedState(Frame.MAXIMIZED_BOTH);
+
+    } else if (jabatan.equals("kasir")) {
+
+        DashboardKasir dk = new DashboardKasir();
+        dk.P = pg;
+        dk.setVisible(true);
+        dk.setExtendedState(Frame.MAXIMIZED_BOTH);
+
+    } else if (jabatan.equals("manager")) {
+
+        DashboardManager dm = new DashboardManager();
+        dm.P = pg;
+        dm.setVisible(true);
+        dm.setExtendedState(Frame.MAXIMIZED_BOTH);
+
+    } else {
+        System.err.println("Jabatan tidak dikenali!");
+    }
+
+} else {
+    System.err.println("Akun tidak ditemukan");
+}
+
         } catch (SQLException e) {
             System.err.println(""
             + "LOkasi : "+getClass()+""

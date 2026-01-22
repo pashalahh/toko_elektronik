@@ -4,7 +4,15 @@
  */
 package dialogs;
 
-import panel.Manageuser;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import konektor.koneksi;
+import panel.Manageproduk;
 
 /**
  *
@@ -32,17 +40,19 @@ public class AddNewProduk extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnBatal = new javax.swing.JButton();
+        btnSimpan = new javax.swing.JButton();
         diskon = new javax.swing.JTextField();
         stok = new javax.swing.JTextField();
         harga = new javax.swing.JTextField();
         txtnamaproduk = new javax.swing.JTextField();
+        cmbKategori = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         Namaproduk = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -50,61 +60,67 @@ public class AddNewProduk extends javax.swing.JDialog {
         jPanel1.setPreferredSize(new java.awt.Dimension(626, 391));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setBackground(new java.awt.Color(255, 0, 0));
-        jButton2.setText("Batal");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, -1, -1));
-
-        jButton1.setBackground(new java.awt.Color(0, 255, 0));
-        jButton1.setText("Simpan");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBatal.setBackground(new java.awt.Color(255, 0, 0));
+        btnBatal.setText("Batal");
+        btnBatal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBatalActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
+        jPanel1.add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, -1, -1));
 
-        diskon.setPreferredSize(new java.awt.Dimension(64, 22));
+        btnSimpan.setBackground(new java.awt.Color(0, 255, 0));
+        btnSimpan.setText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
+
         diskon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 diskonActionPerformed(evt);
             }
         });
-        jPanel1.add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 210, 20));
+        jPanel1.add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 210, 20));
+        jPanel1.add(stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 210, 20));
+        jPanel1.add(harga, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 210, 20));
 
-        stok.setPreferredSize(new java.awt.Dimension(64, 22));
-        jPanel1.add(stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 210, 20));
-
-        harga.setPreferredSize(new java.awt.Dimension(64, 22));
-        jPanel1.add(harga, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 210, 20));
-
-        txtnamaproduk.setPreferredSize(new java.awt.Dimension(64, 22));
         txtnamaproduk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnamaprodukActionPerformed(evt);
             }
         });
-        jPanel1.add(txtnamaproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 210, 20));
+        jPanel1.add(txtnamaproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 210, 20));
+
+        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dapur", "Keamanan", "Audio", "Peralatan Rumah Tangga", "Kabel" }));
+        jPanel1.add(cmbKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 210, -1));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Stok");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Diskon");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, -1, -1));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Harga");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, -1, -1));
 
         Namaproduk.setForeground(new java.awt.Color(255, 255, 255));
         Namaproduk.setText("Nama Produk");
-        jPanel1.add(Namaproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
+        jPanel1.add(Namaproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(153, 153, 255));
         jLabel2.setText("MINUS ELECTRIC");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Kategori");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Premium Vector _ HUD, UI, GUI futuristic user interface screen elements_ High tech screen.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -132,9 +148,15 @@ public class AddNewProduk extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_diskonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        simpanData();
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnBatalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,55 +197,80 @@ public class AddNewProduk extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Namaproduk;
+    private javax.swing.JButton btnBatal;
+    private javax.swing.JButton btnSimpan;
+    private javax.swing.JComboBox<String> cmbKategori;
     private javax.swing.JTextField diskon;
     private javax.swing.JTextField harga;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField stok;
     private javax.swing.JTextField txtnamaproduk;
     // End of variables declaration//GEN-END:variables
-}
 private void simpanData() {
-    try{
-        String Namaproduk = txtnamaproduk.getText();
-        String Harga = txtharga.getText();
-        String Stok = txtstok.getText();
-        String Diskon = txtdiskon.getText();
-        
-        
+    try {
+        // 1. Ambil input user
+        String namaProduk = txtnamaproduk.getText();
+        int hargaProduk = Integer.parseInt(harga.getText());
+        int stokProduk = Integer.parseInt(stok.getText());
+        int diskonProduk = Integer.parseInt(diskon.getText());
+
+        // 2. Ambil NAMA kategori dari ComboBox
+        String namaKategori = cmbKategori.getSelectedItem().toString();
+
+        // 3. Cari ID kategori berdasarkan nama
         Connection k = koneksi.Go();
-        String sql ="INSERT INTO produk"
-                + "(Nama_produk, harga, stok, diskon)"
-                + "VALUES"
-                + "?,?,?,?";
-        
-        PreparedStatement PS = k.prepareStatemenet(sql);
-        PS.setString(1, nama_produk);
-        PS.setString(2, harga);
-        PS.setString(3, stok);
-        PS.setString(4, diskon);
-        PS.executeUpdate();
-        
-        
-        Manageuser.refreshData("");
-        this.setVisible(false);
-        
-        
-        JoptionPane.showMessageDialog(null, "Produk Baru Berhasil Di Simpan!");
-        
-                
-                
-        
-    }catch (Exception e) {
-            System.err.println(""
-                 + "Lokasi: "+getClass()+""
-                 + "Method: @simpanData()"
-                 + "Error: "+e.getMessage());
+        String sqlCari = "SELECT id_kategori FROM kategori WHERE nama_kategori = ?";
+        PreparedStatement psCari = k.prepareStatement(sqlCari);
+        psCari.setString(1, namaKategori);
+        ResultSet rs = psCari.executeQuery();
+
+        if (!rs.next()) {
+            JOptionPane.showMessageDialog(this,
+                "Kategori tidak ditemukan!",
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        int idKategori = rs.getInt("id_kategori");
+
+        // 4. Simpan produk (PAKAI ID)
+        String sql = "INSERT INTO produk "
+                   + "(nama_produk, harga, stok, id_kategori, diskon) "
+                   + "VALUES (?, ?, ?, ?, ?)";
+
+        PreparedStatement ps = k.prepareStatement(sql);
+        ps.setString(1, namaProduk);
+        ps.setInt(2, hargaProduk);
+        ps.setInt(3, stokProduk);
+        ps.setInt(4, idKategori); 
+        ps.setInt(5, diskonProduk);
+
+        ps.executeUpdate();
+
+        // 5. Refresh JTable & tutup dialog
+        Manageproduk.refreshDataProduk("");
+        this.dispose();
+
+        JOptionPane.showMessageDialog(this,
+            "Produk berhasil ditambahkan!",
+            "Sukses",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this,
+            "Gagal menyimpan produk!\n" + e.getMessage(),
+            "Error",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
 }
 }

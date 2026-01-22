@@ -6,11 +6,12 @@ package dialogs;
 
 
 import konektor.koneksi;
-import konektor.pegawai;
+import konektor.produk;
 import panel.Manageuser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
+import panel.Manageproduk;
 
 /**
  *
@@ -23,6 +24,7 @@ public class HapusProduct extends javax.swing.JDialog {
     /**
      * Creates new form HapusProduct
      */
+    public produk pr;
     public HapusProduct(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -39,24 +41,34 @@ public class HapusProduct extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnBatal = new javax.swing.JButton();
+        btnHapus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
         jLabel1.setText("jLabel1");
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 0));
-        jButton1.setText("Batal");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBatal.setBackground(new java.awt.Color(255, 0, 0));
+        btnBatal.setText("Batal");
+        btnBatal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBatalActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Hapus");
+        btnHapus.setText("Hapus");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -69,9 +81,9 @@ public class HapusProduct extends javax.swing.JDialog {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(46, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnBatal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(btnHapus)
                         .addGap(83, 83, 83))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -81,8 +93,8 @@ public class HapusProduct extends javax.swing.JDialog {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnBatal)
+                    .addComponent(btnHapus))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
 
@@ -100,37 +112,46 @@ public class HapusProduct extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-               try  {
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+        this.dispose();   
+    }//GEN-LAST:event_btnBatalActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        jLabel1.setText(""
+            +"<html>"
+            +"<p>Apakah Anda Yakin Ingin Menghapus produk "
+            + " "+pr.getNamaproduk()+"?</p>"
+            +"</html>"
+            +"");
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        // TODO add your handling code here:
+        try  {
             Connection K = koneksi.Go();
-            String sql = "DELETE FROM pengguna WHERE "
-                    + "id_product=?";
+            String sql = "DELETE FROM produk WHERE "
+                    + "id_produk=?";
             PreparedStatement PS = K.prepareStatement(sql);
-            PS.setInt(1,P.getId());
+            PS.setInt(1,pr.getIdproduk());
             PS.executeUpdate();
             
             //refresh data
-            Manageuser.refreshData("");
+            Manageproduk.refreshDataProduk("");
             this.setVisible(false);
             
             JOptionPane.showMessageDialog(null,"Berhasil menghapus data");
             
         }catch(Exception e) {
+             JOptionPane.showMessageDialog(
+                this,
+                "Gagal menghapus produk!\n" + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+             );
             //error handling
-        }
-    }         
-     
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {                                  
-        // TODO add your handling code here:
-        jLabel1.setText(""
-            +"<html>"
-            +"<p>Apakah Anda Yakin Ingin Menghapus data "
-            + " "+p.getNama()+"?</p>"
-            +"</html>"
-            +"");
-    }
- // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        }    
+    }//GEN-LAST:event_btnHapusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,8 +191,8 @@ public class HapusProduct extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnBatal;
+    private javax.swing.JButton btnHapus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

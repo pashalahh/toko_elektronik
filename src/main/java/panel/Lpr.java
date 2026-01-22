@@ -4,17 +4,30 @@
  */
 package panel;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import konektor.koneksi;
+
 /**
  *
  * @author LENOVO
  */
 public class Lpr extends javax.swing.JPanel {
 
+    private DefaultTableModel model;
+
     /**
      * Creates new form Lpr
      */
     public Lpr() {
         initComponents();
+        initTable();
+        loadData();
+        loadRingkasan();
+        loadLaporan("");
     }
 
     /**
@@ -25,75 +38,370 @@ public class Lpr extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
+        txtCari = new javax.swing.JTextField();
+        btnRefresh = new javax.swing.JButton();
+        lblTransaksi = new javax.swing.JLabel();
+        lblBarang = new javax.swing.JLabel();
+        lblPendapatan = new javax.swing.JLabel();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(new java.awt.BorderLayout());
 
-        jTable1.setFont(new java.awt.Font("Tw Cen MT", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Id", "Tanggal", "Kasir", "Item", "Bayar", "Aksi"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 580, 140));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 102));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setBackground(new java.awt.Color(51, 153, 255));
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 153, 255));
         jLabel1.setText("LAPORAN KEUANGAN");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 24, 0, 0);
+        jPanel1.add(jLabel1, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Total Transaksi      :");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 24, 0, 0);
+        jPanel1.add(jLabel2, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Barang Terjual      :");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 23, 0, 0);
+        jPanel1.add(jLabel3, gridBagConstraints);
 
         jLabel4.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Total Pendapatan :");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 23, 15, 0);
+        jPanel1.add(jLabel4, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
-        jLabel5.setText("Transaksi Batal      :");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, -1, -1));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
+        jTable1.setFont(new java.awt.Font("Tw Cen MT", 0, 12)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 580, 10));
+            },
+            new String [] {
+                "Id", "Id_penjualan", "Produk", "Qty", "Harga", "Subtotal"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 508;
+        gridBagConstraints.ipady = 120;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(18, 24, 0, 26);
+        jPanel1.add(jScrollPane1, gridBagConstraints);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Pencarian");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 22;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(37, 24, 0, 0);
+        jPanel1.add(jLabel5, gridBagConstraints);
+
+        txtCari.setText("Cari");
+        txtCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCariKeyReleased(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 109;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 0, 0);
+        jPanel1.add(txtCari, gridBagConstraints);
+
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 40, 0, 0);
+        jPanel1.add(btnRefresh, gridBagConstraints);
+
+        lblTransaksi.setForeground(new java.awt.Color(255, 255, 255));
+        lblTransaksi.setText("jLabel6");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 10;
+        gridBagConstraints.ipadx = 88;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(21, 18, 0, 0);
+        jPanel1.add(lblTransaksi, gridBagConstraints);
+
+        lblBarang.setForeground(new java.awt.Color(255, 255, 255));
+        lblBarang.setText("jLabel6");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 10;
+        gridBagConstraints.ipadx = 88;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(21, 18, 0, 0);
+        jPanel1.add(lblBarang, gridBagConstraints);
+
+        lblPendapatan.setForeground(new java.awt.Color(255, 255, 255));
+        lblPendapatan.setText("jLabel6");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridwidth = 10;
+        gridBagConstraints.ipadx = 88;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 18, 0, 0);
+        jPanel1.add(lblPendapatan, gridBagConstraints);
+
+        add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        txtCari.setText("");
+        loadLaporan("");
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void txtCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCariKeyReleased
+        // TODO add your handling code here:
+        String key = txtCari.getText();
+        loadLaporan(key);
+    }//GEN-LAST:event_txtCariKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblBarang;
+    private javax.swing.JLabel lblPendapatan;
+    private javax.swing.JLabel lblTransaksi;
+    private javax.swing.JTextField txtCari;
     // End of variables declaration//GEN-END:variables
+    private void initTable() {
+        model = new DefaultTableModel(
+            new Object[][]{},
+            new String[]{
+                "ID Detail",
+                "ID Penjualan",
+                "ID Produk",
+                "Qty",
+                "Harga",
+                "Subtotal"
+            }
+        );
+        jTable1.setModel(model);
+    }
+    
+    private void loadData() {
+    model.setRowCount(0);
+
+    try {
+        Connection c = koneksi.Go();
+        String sql = """
+            SELECT 
+                dp.id_detail,
+                dp.id_penjualan,
+                dp.id_produk,
+                dp.qty,
+                dp.harga,
+                dp.subtotal
+            FROM detail_penjualan dp
+            JOIN penjualan p ON dp.id_penjualan = p.id_penjualan
+            WHERE DATE(p.tanggal) = CURDATE()
+            ORDER BY p.tanggal DESC
+        """;
+
+        PreparedStatement ps = c.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            model.addRow(new Object[]{
+                rs.getInt("id_detail"),
+                rs.getInt("id_penjualan"),
+                rs.getInt("id_produk"),
+                rs.getInt("qty"),
+                rs.getDouble("harga"),
+                rs.getDouble("subtotal")
+            });
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }
+    
+    private void loadRingkasan() {
+    try {
+        Connection c = koneksi.Go();
+
+        // Pendapatan
+        String sqlPendapatan = """
+            SELECT SUM(dp.subtotal) AS pendapatan
+            FROM detail_penjualan dp
+            JOIN penjualan p ON dp.id_penjualan = p.id_penjualan
+            WHERE DATE(p.tanggal) = CURDATE()
+        """;
+        ResultSet rp = c.prepareStatement(sqlPendapatan).executeQuery();
+        if (rp.next()) {
+            lblPendapatan.setText("Rp " + rp.getDouble("pendapatan"));
+        }
+
+        // Transaksi
+        String sqlTransaksi = """
+            SELECT COUNT(DISTINCT id_penjualan) AS total_transaksi
+            FROM penjualan
+            WHERE DATE(tanggal) = CURDATE()
+        """;
+        ResultSet rt = c.prepareStatement(sqlTransaksi).executeQuery();
+        if (rt.next()) {
+            lblTransaksi.setText(rt.getInt("total_transaksi") + " Transaksi");
+        }
+
+        // Barang
+        String sqlBarang = """
+            SELECT SUM(dp.qty) AS total_barang
+            FROM detail_penjualan dp
+            JOIN penjualan p ON dp.id_penjualan = p.id_penjualan
+            WHERE DATE(p.tanggal) = CURDATE()
+        """;
+        ResultSet rb = c.prepareStatement(sqlBarang).executeQuery();
+        if (rb.next()) {
+            lblBarang.setText(rb.getInt("total_barang") + " Item");
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }
+    
+    private void loadLaporan(String key) {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0);
+
+    double pendapatan = 0;
+    int totalBarang = 0;
+    int totalTransaksi = 0;
+
+    try {
+        Connection c = koneksi.Go();
+
+        String sql = """
+            SELECT 
+                id_detail,
+                id_penjualan,
+                id_produk,
+                qty,
+                harga,
+                subtotal
+            FROM detail_penjualan
+            WHERE id_penjualan LIKE ?
+            ORDER BY id_penjualan DESC
+        """;
+
+        PreparedStatement ps = c.prepareStatement(sql);
+        ps.setString(1, "%" + key + "%");
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int qty = rs.getInt("qty");
+            double subtotal = rs.getDouble("subtotal");
+
+            model.addRow(new Object[]{
+                rs.getInt("id_detail"),
+                rs.getInt("id_penjualan"),
+                rs.getInt("id_produk"),
+                qty,
+                rs.getDouble("harga"),
+                subtotal
+            });
+
+            pendapatan += subtotal;
+            totalBarang += qty;
+        }
+
+        // hitung jumlah transaksi (distinct id_penjualan)
+        String sqlTrx = """
+            SELECT COUNT(DISTINCT id_penjualan) 
+            FROM detail_penjualan
+            WHERE id_penjualan LIKE ?
+        """;
+        PreparedStatement ps2 = c.prepareStatement(sqlTrx);
+        ps2.setString(1, "%" + key + "%");
+        ResultSet rs2 = ps2.executeQuery();
+        if (rs2.next()) {
+            totalTransaksi = rs2.getInt(1);
+        }
+
+        // set ke label
+        lblPendapatan.setText("Rp " + pendapatan);
+        lblBarang.setText(String.valueOf(totalBarang));
+        lblTransaksi.setText(String.valueOf(totalTransaksi));
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
+}
+
+
+
+
 }

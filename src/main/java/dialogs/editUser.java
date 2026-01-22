@@ -129,7 +129,7 @@ public class editUser extends javax.swing.JDialog {
         });
         jPanel1.add(txtNama1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 240, -1));
 
-        txtJabatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Kasir" }));
+        txtJabatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Kasir", "Manager" }));
         txtJabatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtJabatanActionPerformed(evt);

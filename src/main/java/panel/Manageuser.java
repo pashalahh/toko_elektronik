@@ -44,59 +44,95 @@ public class Manageuser extends javax.swing.JPanel {
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
-        cari = new javax.swing.JLabel();
         klmCari = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
         setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnAdd.setText("Tambah");
+        btnAdd.setBackground(new java.awt.Color(0, 153, 255));
+        btnAdd.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdd.setText("TAMBAH");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 32, -1, -1));
 
-        btnEdit.setText("Edit");
+        btnEdit.setBackground(new java.awt.Color(204, 204, 204));
+        btnEdit.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
+        btnEdit.setText("EDIT");
         btnEdit.setEnabled(false);
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 32, -1, -1));
 
-        btnDelete.setText("Hapus");
+        btnDelete.setBackground(new java.awt.Color(255, 51, 51));
+        btnDelete.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setText("HAPUS");
         btnDelete.setEnabled(false);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
-        jPanel2.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(239, 32, -1, -1));
 
-        btnRefresh.setText("Refresh");
+        btnRefresh.setBackground(new java.awt.Color(255, 204, 51));
+        btnRefresh.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
+        btnRefresh.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefresh.setText("REFRESH");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRefreshActionPerformed(evt);
             }
         });
-        jPanel2.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(342, 32, -1, -1));
 
-        cari.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cari.setText("Cari");
-        jPanel2.add(cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 30, -1, 30));
-
+        klmCari.setText("Cari user disini...");
+        klmCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                klmCariActionPerformed(evt);
+            }
+        });
         klmCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 klmCariKeyReleased(evt);
             }
         });
-        jPanel2.add(klmCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 260, 50));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(btnAdd)
+                .addGap(18, 18, 18)
+                .addComponent(btnEdit)
+                .addGap(18, 18, 18)
+                .addComponent(btnDelete)
+                .addGap(18, 18, 18)
+                .addComponent(btnRefresh)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                .addComponent(klmCari, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(klmCari, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit)
+                    .addComponent(btnDelete)
+                    .addComponent(btnRefresh)
+                    .addComponent(btnAdd))
+                .addContainerGap())
+        );
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -180,13 +216,16 @@ public class Manageuser extends javax.swing.JPanel {
         searchDataUser();
     }//GEN-LAST:event_klmCariKeyReleased
 
+    private void klmCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_klmCariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_klmCariActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnRefresh;
-    private javax.swing.JLabel cari;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable jTable1;
@@ -221,16 +260,21 @@ public class Manageuser extends javax.swing.JPanel {
 
 
     private void searchDataUser() {
-        String key = cari.getText();
-        String where = " WHERE "
-                + "id_pegawai LIKE '%" + key + "%' OR "
-                + "nama LIKE '%" + key + "%' OR "
-                + "jabatan LIKE '%" + key + "%' OR "
-                + "username LIKE '%" + key + "%' OR "
-                + "password LIKE '%" + key + "%'";
+        String key = klmCari.getText().trim();
 
-        System.out.println("String WHERE yang dibuat: " + where);
+        if (key.isEmpty() || key.equalsIgnoreCase("Cari user disini...")) {
+            refreshData("");
+            return;
+        }
+
+        String where = " WHERE " +
+            "id_pengguna LIKE '%" + key + "%' OR " +
+            "nama LIKE '%" + key + "%' OR " +
+            "jabatan LIKE '%" + key + "%' OR " +
+            "username LIKE '%" + key + "%' OR " +
+            "email LIKE '%" + key + "%'";
+
+//        System.out.println("String WHERE yang dibuat: " + where);
         refreshData(where);
     }
 }
-

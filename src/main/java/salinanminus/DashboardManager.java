@@ -4,34 +4,33 @@
  */
 package salinanminus;
 
-import java.awt.BorderLayout;
-import java.awt.Frame;
-import javax.swing.JPanel;
-import panel.Manageuser;
-import panel.Manageproduk;
-import konektor.pegawai;
-import konektor.produk;
 import dialogs.profil;
+import java.awt.Frame;
+import konektor.pegawai;
+import java.awt.BorderLayout;
+import panel.ProdukTerlaris;
+import panel.ProdukTerjual;
+import panel.Pendapatan;
+import panel.Grafik;
+import panel.KinerjaKasir;
+import panel.RiwayarTransaksi;
+
 
 /**
  *
  * @author LENOVO
  */
-public class DashboardAdmin extends javax.swing.JFrame {
-    pegawai P;
+public class DashboardManager extends javax.swing.JFrame {
+    public pegawai P;
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardAdmin.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardManager.class.getName());
 
     /**
-     * Creates new form DashboardAdmin
+     * Creates new form DashboardManager
      */
-    public DashboardAdmin() {
+    public DashboardManager() {
         initComponents();
-        this.setExtendedState(Frame.MAXIMIZED_BOTH); // agar layar penuh
-        this.setResizable(true);
     }
-    
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,12 +46,16 @@ public class DashboardAdmin extends javax.swing.JFrame {
         minus = new javax.swing.JLabel();
         nama = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnProfile = new javax.swing.JButton();
         logo = new javax.swing.JLabel();
         bgatas = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        btnKelola = new javax.swing.JButton();
-        btnKelola2 = new javax.swing.JButton();
+        btnTerlaris = new javax.swing.JButton();
+        btnRiwayat = new javax.swing.JButton();
+        btnKinerja = new javax.swing.JButton();
+        btnGrafik = new javax.swing.JButton();
+        btnPendapatan = new javax.swing.JButton();
+        btnProdukTerjual = new javax.swing.JButton();
         bgside = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -96,15 +99,15 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jPanel2.add(btnLogout);
         btnLogout.setBounds(1230, 180, 220, 40);
 
-        jButton1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        jButton1.setText("Profile");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnProfile.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        btnProfile.setText("Profile");
+        btnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnProfileActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
-        jButton1.setBounds(1230, 130, 220, 40);
+        jPanel2.add(btnProfile);
+        btnProfile.setBounds(1230, 130, 220, 40);
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo 150.png"))); // NOI18N
         jPanel2.add(logo);
@@ -118,25 +121,65 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         jPanel3.setLayout(null);
 
-        btnKelola.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnKelola.setText("Kelola Data User");
-        btnKelola.addActionListener(new java.awt.event.ActionListener() {
+        btnTerlaris.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnTerlaris.setText("Produk Terlaris");
+        btnTerlaris.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKelolaActionPerformed(evt);
+                btnTerlarisActionPerformed(evt);
             }
         });
-        jPanel3.add(btnKelola);
-        btnKelola.setBounds(60, 0, 170, 50);
+        jPanel3.add(btnTerlaris);
+        btnTerlaris.setBounds(60, 0, 150, 50);
 
-        btnKelola2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnKelola2.setText("Kelola Data Produk");
-        btnKelola2.addActionListener(new java.awt.event.ActionListener() {
+        btnRiwayat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnRiwayat.setText("Riwayat Penjualan");
+        btnRiwayat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKelola2ActionPerformed(evt);
+                btnRiwayatActionPerformed(evt);
             }
         });
-        jPanel3.add(btnKelola2);
-        btnKelola2.setBounds(60, 80, 170, 50);
+        jPanel3.add(btnRiwayat);
+        btnRiwayat.setBounds(60, 400, 150, 50);
+
+        btnKinerja.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnKinerja.setText("Kinerja Kasir");
+        btnKinerja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKinerjaActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnKinerja);
+        btnKinerja.setBounds(60, 320, 150, 50);
+
+        btnGrafik.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnGrafik.setText("Grafik Penjualan");
+        btnGrafik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGrafikActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnGrafik);
+        btnGrafik.setBounds(60, 240, 150, 50);
+
+        btnPendapatan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnPendapatan.setText("Pendapatan");
+        btnPendapatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPendapatanActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnPendapatan);
+        btnPendapatan.setBounds(60, 160, 150, 50);
+
+        btnProdukTerjual.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnProdukTerjual.setText("Produk Terjual");
+        btnProdukTerjual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProdukTerjualActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnProdukTerjual);
+        btnProdukTerjual.setBounds(60, 80, 150, 50);
 
         bgside.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg pinggir.jpg"))); // NOI18N
         jPanel3.add(bgside);
@@ -144,7 +187,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 270, 540));
 
-        jPanel4.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         jPanel4.setLayout(new java.awt.BorderLayout());
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, 1230, 580));
 
@@ -156,39 +198,56 @@ public class DashboardAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnKelolaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelolaActionPerformed
-        // TODO add your handling code here:
-        AddViews(new Manageuser());
-    }//GEN-LAST:event_btnKelolaActionPerformed
-
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         // TODO add your handling code here:
         login P = new login();
-        this.setVisible(false); 
-        P.setVisible(true); 
-        P.setExtendedState(Frame.MAXIMIZED_BOTH); 
+        this.setVisible(false);
+        P.setVisible(true);
+        P.setExtendedState(Frame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-         nama.setText(P.getUsername());
-    }//GEN-LAST:event_formWindowOpened
-
-    private void btnKelola1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelola1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnKelola1ActionPerformed
-
-    private void btnKelola2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelola2ActionPerformed
-        // TODO add your handling code here:
-        AddViews(new Manageproduk());
-    }//GEN-LAST:event_btnKelola2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
         // TODO add your handling code here:
         profil pf = new profil(this, true);
         pf.setDataProfil(P);
         pf.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_btnProfileActionPerformed
+
+    private void btnTerlarisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerlarisActionPerformed
+        // TODO add your handling code here:
+        tampilPanel(new ProdukTerlaris());
+    }//GEN-LAST:event_btnTerlarisActionPerformed
+
+    private void btnProdukTerjualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdukTerjualActionPerformed
+        // TODO add your handling code here:
+        tampilPanel(new ProdukTerjual());
+    }//GEN-LAST:event_btnProdukTerjualActionPerformed
+
+    private void btnPendapatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendapatanActionPerformed
+        // TODO add your handling code here:
+         tampilPanel(new Pendapatan());
+    }//GEN-LAST:event_btnPendapatanActionPerformed
+
+    private void btnGrafikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrafikActionPerformed
+        // TODO add your handling code here:
+        tampilPanel(new Grafik());
+    }//GEN-LAST:event_btnGrafikActionPerformed
+
+    private void btnKinerjaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKinerjaActionPerformed
+        // TODO add your handling code here:
+        tampilPanel(new KinerjaKasir());
+    }//GEN-LAST:event_btnKinerjaActionPerformed
+
+    private void btnRiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRiwayatActionPerformed
+        // TODO add your handling code here:
+         tampilPanel(new RiwayarTransaksi());
+    }//GEN-LAST:event_btnRiwayatActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        nama.setText(P.getUsername());
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -212,16 +271,20 @@ public class DashboardAdmin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new DashboardAdmin().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new DashboardManager().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bgatas;
     private javax.swing.JLabel bgside;
-    private javax.swing.JButton btnKelola;
-    private javax.swing.JButton btnKelola2;
+    private javax.swing.JButton btnGrafik;
+    private javax.swing.JButton btnKinerja;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnPendapatan;
+    private javax.swing.JButton btnProdukTerjual;
+    private javax.swing.JButton btnProfile;
+    private javax.swing.JButton btnRiwayat;
+    private javax.swing.JButton btnTerlaris;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -232,14 +295,13 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel nama;
     // End of variables declaration//GEN-END:variables
 
-     private void AddViews(JPanel P){
-        if(jPanel4.getComponentCount() > 0){
-            jPanel4.removeAll();
-        }
-        jPanel4.add(P, BorderLayout.CENTER);
-        jPanel4.revalidate();
-        jPanel4.repaint();
-    }
+    private void tampilPanel(javax.swing.JPanel panel) {
+    jPanel4.removeAll();
+    jPanel4.setLayout(new BorderLayout());
+    jPanel4.add(panel, BorderLayout.CENTER);
+    jPanel4.revalidate();
+    jPanel4.repaint();
+}
 
-
+    
 }

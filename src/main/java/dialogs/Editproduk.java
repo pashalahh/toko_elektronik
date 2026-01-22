@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import konektor.koneksi;
+import konektor.produk;
 import panel.Manageuser;
 
 /**
@@ -18,7 +19,7 @@ import panel.Manageuser;
 public class Editproduk extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Editproduk.class.getName());
-
+    public produk pr;
     /**
      * Creates new form Editproduk
      */
@@ -38,22 +39,26 @@ public class Editproduk extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        nama = new javax.swing.JLabel();
-        jabatan = new javax.swing.JLabel();
-        username1 = new javax.swing.JLabel();
-        email1 = new javax.swing.JLabel();
-        password1 = new javax.swing.JLabel();
-        txtNama1 = new javax.swing.JTextField();
-        txtJabatan = new javax.swing.JComboBox<>();
-        txtEmail = new javax.swing.JTextField();
-        txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JPasswordField();
         btnBatal = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
+        btnSimpan = new javax.swing.JButton();
+        Namaproduk = new javax.swing.JLabel();
+        txtnamaproduk = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        harga = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        stok = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        cmbKategori = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        diskon = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -61,56 +66,6 @@ public class Editproduk extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(153, 153, 255));
         jLabel1.setText("MINUS ELECTRIC");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
-
-        nama.setForeground(new java.awt.Color(255, 255, 255));
-        nama.setText("Nama");
-        jPanel1.add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 56, -1));
-
-        jabatan.setForeground(new java.awt.Color(255, 255, 255));
-        jabatan.setText("Jabatan");
-        jPanel1.add(jabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 56, -1));
-
-        username1.setForeground(new java.awt.Color(255, 255, 255));
-        username1.setText("Username");
-        jPanel1.add(username1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 90, -1));
-
-        email1.setForeground(new java.awt.Color(255, 255, 255));
-        email1.setText("Email");
-        jPanel1.add(email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 56, -1));
-
-        password1.setForeground(new java.awt.Color(255, 255, 255));
-        password1.setText("Password");
-        jPanel1.add(password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 90, -1));
-
-        txtNama1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNama1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtNama1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 240, -1));
-
-        txtJabatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Kasir" }));
-        txtJabatan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtJabatanActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtJabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 240, -1));
-
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 240, -1));
-
-        txtUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsernameActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 240, -1));
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 240, -1));
 
         btnBatal.setBackground(new java.awt.Color(255, 0, 0));
         btnBatal.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -123,18 +78,54 @@ public class Editproduk extends javax.swing.JDialog {
         });
         jPanel1.add(btnBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, -1, -1));
 
-        btnEdit.setBackground(new java.awt.Color(153, 255, 153));
-        btnEdit.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnEdit.setText("Simpan");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+        btnSimpan.setBackground(new java.awt.Color(153, 255, 153));
+        btnSimpan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSimpan.setText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
+                btnSimpanActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, -1, -1));
+        jPanel1.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, -1, -1));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Premium Vector _ HUD, UI, GUI futuristic user interface screen elements_ High tech screen.jpg"))); // NOI18N
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 390));
+        Namaproduk.setForeground(new java.awt.Color(255, 255, 255));
+        Namaproduk.setText("Nama Produk");
+        jPanel1.add(Namaproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
+
+        txtnamaproduk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnamaprodukActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtnamaproduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 210, 20));
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Harga");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, -1, -1));
+        jPanel1.add(harga, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 210, 20));
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Stok");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
+        jPanel1.add(stok, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 210, 20));
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Kategori");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, -1, -1));
+
+        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dapur", "Keamanan", "Audio", "Peralatan Rumah Tangga", "Kabel" }));
+        jPanel1.add(cmbKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 210, -1));
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Diskon");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, -1, -1));
+
+        diskon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diskonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 210, 20));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Premium Vector _ HUD, UI, GUI futuristic user interface screen elements_ High tech screen.jpg"))); // NOI18N
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 390));
@@ -163,31 +154,39 @@ public class Editproduk extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNama1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNama1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNama1ActionPerformed
-
-    private void txtJabatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJabatanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtJabatanActionPerformed
-
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
-
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnBatalActionPerformed
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
-//        edituser();
-    }//GEN-LAST:event_btnEditActionPerformed
+        editproduk();
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void txtnamaprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnamaprodukActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnamaprodukActionPerformed
+
+    private void diskonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diskonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_diskonActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if (pr == null) {
+        JOptionPane.showMessageDialog(this, "Data produk tidak ditemukan!");
+        this.dispose();
+        return;
+    }
+
+    txtnamaproduk.setText(pr.getNamaproduk());
+    harga.setText(String.valueOf(pr.getHarga()));
+    stok.setText(String.valueOf(pr.getStok()));
+    diskon.setText(String.valueOf(pr.getDiskon()));
+    cmbKategori.setSelectedItem(pr.getNamaKategori());
+
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -227,65 +226,81 @@ public class Editproduk extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Namaproduk;
     private javax.swing.JButton btnBatal;
-    private javax.swing.JButton btnEdit;
-    private javax.swing.JLabel email1;
+    private javax.swing.JButton btnSimpan;
+    private javax.swing.JComboBox<String> cmbKategori;
+    private javax.swing.JTextField diskon;
+    private javax.swing.JTextField harga;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel jabatan;
-    private javax.swing.JLabel nama;
-    private javax.swing.JLabel password1;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JComboBox<String> txtJabatan;
-    private javax.swing.JTextField txtNama1;
-    private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtUsername;
-    private javax.swing.JLabel username1;
+    private javax.swing.JTextField stok;
+    private javax.swing.JTextField txtnamaproduk;
     // End of variables declaration//GEN-END:variables
- private void editproduk() {
-        try{
-            String Nama = txtNama1.getText();
-            String Jabatan = txtJabatan.getSelectedItem().toString();
-            String Username = txtUsername.getText();
-            String Email = txtEmail.getText();
-            String Password = new String(txtPassword.getPassword());
-            
-            Connection k = koneksi.Go();
-            String sql ="INSERT INTO pengguna"
-                    + "(nama,jabatan,username,email,password)"
-                    + "VALUES"
-                    + "(?,?,?,?,?)";          
-            PreparedStatement PS = k.prepareStatement(sql);
-            PS.setString(1, Nama);
-            PS.setString(2, Jabatan);
-            PS.setString(3, Username);
-            PS.setString(4, Email);
-            PS.setString(5, Password);
-            PS.executeUpdate();
-            
-            Manageuser.refreshData("");
-            this.setVisible(false);
-            
-            
-            JOptionPane.showMessageDialog(null, "Data Berhasil Di Edit!");
-            
-     
-        } catch (Exception e) {
-            System.err.println(""
-                 + "Lokasi: "+getClass()+""
-                 + "Method: @Editproduk()"
-                 + "Error: "+e.getMessage());
-            
-        }
-    }
+private void editproduk() {
+    try {
+        String namaProduk = txtnamaproduk.getText();
+        double hargaProduk = Double.parseDouble(harga.getText());
+        int stokProduk = Integer.parseInt(stok.getText());
+        double diskonProduk = Double.parseDouble(diskon.getText());
+        String namaKategori = cmbKategori.getSelectedItem().toString();
 
-    private static class txtNama1 {
+        Connection k = koneksi.Go();
 
-        public txtNama1() {
+        // Ambil id kategori
+        String sqlKategori = "SELECT id_kategori FROM kategori WHERE nama_kategori = ?";
+        PreparedStatement psKategori = k.prepareStatement(sqlKategori);
+        psKategori.setString(1, namaKategori);
+        var rs = psKategori.executeQuery();
+
+        int idKategori = 0;
+        if (rs.next()) {
+            idKategori = rs.getInt("id_kategori");
         }
+
+        // Update produk
+        String sql = "UPDATE produk SET "
+                   + "nama_produk = ?, "
+                   + "harga = ?, "
+                   + "stok = ?, "
+                   + "id_kategori = ?, "
+                   + "diskon = ? "
+                   + "WHERE id_produk = ?";
+
+        PreparedStatement ps = k.prepareStatement(sql);
+        ps.setString(1, namaProduk);
+        ps.setDouble(2, hargaProduk);
+        ps.setInt(3, stokProduk);
+        ps.setInt(4, idKategori);
+        ps.setDouble(5, diskonProduk);
+        ps.setInt(6, pr.getIdproduk());
+
+
+        ps.executeUpdate();
+
+        panel.Manageproduk.refreshDataProduk("");
+        JOptionPane.showMessageDialog(this, "Produk berhasil diperbarui!");
+        this.dispose();
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this,
+                "Gagal edit produk!\n" + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
     }
+}
+
+//
+//    private static class txtNama1 {
+//
+//        public txtNama1() {
+//        }
+//    }
 }
 
 

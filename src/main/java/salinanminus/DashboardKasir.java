@@ -4,19 +4,28 @@
  */
 package salinanminus;
 import javax.swing.JFrame;
+import konektor.pegawai;
+import dialogs.profil;
+import panel.cs;
+import panel.Lpr;
+import panel.RiwayarTransaksi;
 /**
  *
  * @author bolem
  */
 public class DashboardKasir extends javax.swing.JFrame {
+    public pegawai P;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardKasir.class.getName());
+    
 
     /**
      * Creates new form DashboardKasir
      */
     public DashboardKasir() {
         initComponents();
+        this.P = P;
+        
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         pack();
@@ -37,18 +46,26 @@ public class DashboardKasir extends javax.swing.JFrame {
         nama = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         logo = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         bgatas = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        btnKelola1 = new javax.swing.JButton();
-        btnKelola2 = new javax.swing.JButton();
+        btnTransaksi = new javax.swing.JButton();
+        btnLaporan = new javax.swing.JButton();
+        btnRiwayat = new javax.swing.JButton();
         bgside = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         jPanel2.setLayout(null);
 
         minus.setBackground(new java.awt.Color(255, 255, 255));
@@ -75,11 +92,21 @@ public class DashboardKasir extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnLogout);
-        btnLogout.setBounds(1230, 130, 220, 40);
+        btnLogout.setBounds(1230, 190, 220, 40);
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo 150.png"))); // NOI18N
         jPanel2.add(logo);
         logo.setBounds(10, 50, 150, 160);
+
+        jButton1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jButton1.setText("Profile");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(1230, 130, 220, 40);
 
         bgatas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg atas.jpg"))); // NOI18N
         jPanel2.add(bgatas);
@@ -89,23 +116,35 @@ public class DashboardKasir extends javax.swing.JFrame {
 
         jPanel3.setLayout(null);
 
-        btnKelola1.setText("Transaksi");
-        btnKelola1.addActionListener(new java.awt.event.ActionListener() {
+        btnTransaksi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnTransaksi.setText("Transaksi");
+        btnTransaksi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKelola1ActionPerformed(evt);
+                btnTransaksiActionPerformed(evt);
             }
         });
-        jPanel3.add(btnKelola1);
-        btnKelola1.setBounds(60, 10, 150, 50);
+        jPanel3.add(btnTransaksi);
+        btnTransaksi.setBounds(60, 10, 150, 50);
 
-        btnKelola2.setText("Riwayat Transaksi");
-        btnKelola2.addActionListener(new java.awt.event.ActionListener() {
+        btnLaporan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLaporan.setText("Laporan Harian");
+        btnLaporan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKelola2ActionPerformed(evt);
+                btnLaporanActionPerformed(evt);
             }
         });
-        jPanel3.add(btnKelola2);
-        btnKelola2.setBounds(60, 80, 150, 50);
+        jPanel3.add(btnLaporan);
+        btnLaporan.setBounds(60, 150, 150, 50);
+
+        btnRiwayat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnRiwayat.setText("Riwayat Transaksi");
+        btnRiwayat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRiwayatActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnRiwayat);
+        btnRiwayat.setBounds(60, 80, 150, 50);
 
         bgside.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg pinggir.jpg"))); // NOI18N
         jPanel3.add(bgside);
@@ -132,13 +171,35 @@ public class DashboardKasir extends javax.swing.JFrame {
         P.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
-    private void btnKelola1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelola1ActionPerformed
+    private void btnTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransaksiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnKelola1ActionPerformed
+        cs panelCS = new cs(P);   // kirim pegawai
+        setPanel(panelCS);
+    }//GEN-LAST:event_btnTransaksiActionPerformed
 
-    private void btnKelola2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKelola2ActionPerformed
+    private void btnRiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRiwayatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnKelola2ActionPerformed
+        RiwayarTransaksi rt = new RiwayarTransaksi();
+        setPanel(rt);
+    }//GEN-LAST:event_btnRiwayatActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+         nama.setText(P.getUsername());
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaporanActionPerformed
+        // TODO add your handling code here:
+        Lpr laporan = new Lpr ();
+        setPanel(laporan);
+    }//GEN-LAST:event_btnLaporanActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        profil pf = new profil(this, true);
+        pf.setDataProfil(P);
+        pf.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,9 +229,11 @@ public class DashboardKasir extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bgatas;
     private javax.swing.JLabel bgside;
-    private javax.swing.JButton btnKelola1;
-    private javax.swing.JButton btnKelola2;
+    private javax.swing.JButton btnLaporan;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnRiwayat;
+    private javax.swing.JButton btnTransaksi;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -180,4 +243,10 @@ public class DashboardKasir extends javax.swing.JFrame {
     private javax.swing.JLabel minus;
     private javax.swing.JLabel nama;
     // End of variables declaration//GEN-END:variables
+    private void setPanel(javax.swing.JPanel panel) {
+    jPanel4.removeAll();
+    jPanel4.add(panel);
+    jPanel4.repaint();
+    jPanel4.revalidate();
+}
 }

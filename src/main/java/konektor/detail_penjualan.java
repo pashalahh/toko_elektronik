@@ -4,13 +4,34 @@
  */
 package konektor;
 
-public class produk {
+/**
+ *
+ * @author LENOVO
+ */
+public class detail_penjualan {
+    private int id_detail;
+    private int id_penjualan;
     private int id_produk;
     private String nama_produk;
     private double harga;
-    private int stok;
-    private int id_kategori;
-    private double diskon;
+    private int qty;
+    private double subtotal;
+
+    public int getIddetail() {
+        return id_detail;
+    }
+
+    public void setIddetail(int id_detail) {
+        this.id_detail = id_detail;
+    }
+
+    public int getIdpenjualan() {
+        return id_penjualan;
+    }
+
+    public void setIdpenjualan(int id_penjualan) {
+        this.id_penjualan = id_penjualan;
+    }
 
     public int getIdproduk() {
         return id_produk;
@@ -36,38 +57,20 @@ public class produk {
         this.harga = harga;
     }
 
-    public int getStok() {
-        return stok;
+    public int getQty() {
+        return qty;
     }
 
-    public void setStok(int stok) {
-        this.stok = stok;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 
-    public int getIdkategori() {
-        return id_kategori;
+    public double getSubtotal() {
+        return subtotal;
     }
 
-    public void setIdkategori(int id_kategori) {
-        this.id_kategori = id_kategori;
-    }
-
-    public double getDiskon() {
-        return diskon;
-    }
-
-    public void setDiskon(double diskon) {
-        this.diskon = diskon;
-    }
-    
-    private String namaKategori;
-
-    public String getNamaKategori() {
-        return namaKategori;
-    }
-
-    public void setNamaKategori(String namaKategori) {
-        this.namaKategori = namaKategori;
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
     }
 
 }

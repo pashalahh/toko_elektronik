@@ -4,17 +4,36 @@
  */
 package panel;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+import dialogs.AddNewProduk;
+import konektor.koneksi;
+import konektor.produk;
+import konektor.kategori;
+import dialogs.Editproduk;
+import dialogs.HapusProduct;
+
 /**
  *
  * @author LENOVO
  */
 public class Manageproduk extends javax.swing.JPanel {
+    produk pr;
 
     /**
      * Creates new form Manageproduk
      */
     public Manageproduk() {
         initComponents();
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+    new Object [][] {},
+    new String [] {
+        "ID Produk", "Nama Produk", "Harga", "Stok", "Kategori", "Diskon"
+    }
+));
+refreshDataProduk("");
     }
 
     /**
@@ -28,11 +47,11 @@ public class Manageproduk extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        btnTambah = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnHapus = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -43,37 +62,61 @@ public class Manageproduk extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 102, 255));
         jLabel1.setText("Manage Produk");
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 255));
-        jButton1.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("ADD");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnTambah.setBackground(new java.awt.Color(0, 153, 255));
+        btnTambah.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
+        btnTambah.setForeground(new java.awt.Color(255, 255, 255));
+        btnTambah.setText("TAMBAH");
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnTambahActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(153, 153, 153));
-        jButton2.setText("EDIT");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setBackground(new java.awt.Color(204, 204, 204));
+        btnEdit.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
+        btnEdit.setForeground(new java.awt.Color(255, 255, 255));
+        btnEdit.setText("EDIT");
+        btnEdit.setEnabled(false);
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(153, 153, 153));
-        jButton3.setText("DELATE");
+        btnHapus.setBackground(new java.awt.Color(255, 51, 51));
+        btnHapus.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
+        btnHapus.setForeground(new java.awt.Color(255, 255, 255));
+        btnHapus.setText("HAPUS");
+        btnHapus.setEnabled(false);
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
 
-        jButton4.setBackground(new java.awt.Color(255, 204, 51));
-        jButton4.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("REFRASH");
+        btnRefresh.setBackground(new java.awt.Color(255, 204, 51));
+        btnRefresh.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
+        btnRefresh.setForeground(new java.awt.Color(255, 255, 255));
+        btnRefresh.setText("REFRESH");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("SEARCH");
+        txtSearch.setFont(new java.awt.Font("Tw Cen MT", 0, 14)); // NOI18N
+        txtSearch.setForeground(new java.awt.Color(153, 153, 153));
+        txtSearch.setText("Cari produk disini...");
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,15 +129,15 @@ public class Manageproduk extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addContainerGap(537, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnTambah)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(btnEdit)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(btnHapus)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
+                        .addComponent(btnRefresh)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -104,11 +147,11 @@ public class Manageproduk extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnTambah)
+                    .addComponent(btnHapus)
+                    .addComponent(btnEdit)
+                    .addComponent(btnRefresh)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
 
@@ -116,38 +159,147 @@ public class Manageproduk extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "id_produk", "nama_produk", "harga", "stok", "id_kategori"
+                "id_produk", "nama_produk", "harga", "stok", "nama_kategori", "diskon"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        AddNewProduk NU = new AddNewProduk(null, true);
+        NU.setVisible(true);
+    }//GEN-LAST:event_btnTambahActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if(jTable1.getSelectedRow() != -1){
+            Editproduk ep = new Editproduk(null, true);
+            ep.pr = pr;
+            ep.setVisible(true); 
+        }else {
+            
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        // TODO add your handling code here:
+        HapusProduct hp = new HapusProduct(null, true);
+        hp.pr = pr;
+        hp.setVisible(true);
+    }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        btnEdit.setEnabled(false);
+        btnHapus.setEnabled(false);
+        jTable1.clearSelection();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+    int n = jTable1.getSelectedRow();
+    if (n != -1) {
+        btnEdit.setEnabled(true);
+        btnHapus.setEnabled(true);
+
+        pr = new produk();
+        pr.setIdproduk(Integer.parseInt(jTable1.getValueAt(n, 0).toString()));
+        pr.setNamaproduk(jTable1.getValueAt(n, 1).toString());
+        pr.setHarga(Integer.parseInt(jTable1.getValueAt(n, 2).toString()));
+        pr.setStok(Integer.parseInt(jTable1.getValueAt(n, 3).toString()));
+        pr.setNamaKategori(jTable1.getValueAt(n, 4).toString()); // nama_kategori
+        pr.setDiskon(Integer.parseInt(jTable1.getValueAt(n, 5).toString()));
+    }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+        searchDataProduk();
+    }//GEN-LAST:event_txtSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnHapus;
+    private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnTambah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private static javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+public static void refreshDataProduk(String where) {
+    try {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // bersihkan tabel
+
+        Connection K = koneksi.Go();
+
+        String Q = "SELECT p.id_produk, p.nama_produk, p.harga, p.stok, "
+                 + "k.nama_kategori, p.diskon "
+                 + "FROM produk p "
+                 + "JOIN kategori k ON p.id_kategori = k.id_kategori";
+
+        if (where != null && !where.isEmpty()) {
+            Q += where;
+        }
+
+        Statement S = K.createStatement();
+        ResultSet R = S.executeQuery(Q);
+
+        while (R.next()) {
+            Object[] row = {
+                R.getInt("id_produk"),
+                R.getString("nama_produk"),
+                R.getInt("harga"),
+                R.getInt("stok"),
+                R.getString("nama_kategori"),
+                R.getInt("diskon")
+            };
+            model.addRow(row);
+        }
+
+    } catch (Exception e) {
+        System.out.println("Error refreshDataProduk: " + e.getMessage());
+    }
 }
+
+    
+private void searchDataProduk() {
+    String key = txtSearch.getText().trim();
+
+    if (key.isEmpty() || key.equalsIgnoreCase("Cari produk disini...")) {
+        refreshDataProduk("");
+        return;
+    }
+
+    String where = " WHERE " +
+        "p.id_produk LIKE '%" + key + "%' OR " +
+        "p.nama_produk LIKE '%" + key + "%' OR " +
+        "p.harga LIKE '%" + key + "%' OR " +
+        "p.stok LIKE '%" + key + "%' OR " +
+        "k.nama_kategori LIKE '%" + key + "%' OR " +
+        "p.diskon LIKE '%" + key + "%'";
+
+
+//    System.out.println("String WHERE produk: " + where);
+    refreshDataProduk(where);
+}
+
+}    
