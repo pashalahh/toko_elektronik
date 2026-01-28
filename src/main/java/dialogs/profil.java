@@ -28,9 +28,7 @@ public class profil extends javax.swing.JDialog {
 
     lblNama.setText(P.getNama());
     lblJabatan.setText(P.getJabatan());
-    lblEmail.setText(P.getEmail());
     lblUsername.setText(P.getUsername());
-    lblPassword.setText(P.getPassword());
 }
 
 
@@ -44,13 +42,8 @@ public class profil extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        lblPassword = new javax.swing.JLabel();
         btnKembali = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        lblEmail = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblJabatan = new javax.swing.JLabel();
         lblNama = new javax.swing.JLabel();
@@ -61,16 +54,6 @@ public class profil extends javax.swing.JDialog {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Password  :");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 440, 80, -1));
-
-        lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblPassword.setForeground(new java.awt.Color(255, 255, 255));
-        lblPassword.setText("jLabel3");
-        jPanel1.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 470, 180, -1));
-
         btnKembali.setBackground(new java.awt.Color(255, 0, 0));
         btnKembali.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKembali.setForeground(new java.awt.Color(255, 255, 255));
@@ -80,47 +63,33 @@ public class profil extends javax.swing.JDialog {
                 btnKembaliActionPerformed(evt);
             }
         });
-        jPanel1.add(btnKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 580, -1, -1));
+        jPanel1.add(btnKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Username :");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 80, -1));
-
-        lblUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblUsername.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblUsername.setForeground(new java.awt.Color(255, 255, 255));
+        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsername.setText("jLabel3");
-        jPanel1.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, 180, -1));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Email        :");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 80, -1));
-
-        lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblEmail.setForeground(new java.awt.Color(255, 255, 255));
-        lblEmail.setText("jLabel3");
-        jPanel1.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 180, 20));
+        jPanel1.add(lblUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 180, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Jabatan    :");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 80, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 80, -1));
 
         lblJabatan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblJabatan.setForeground(new java.awt.Color(255, 255, 255));
         lblJabatan.setText("jLabel3");
-        jPanel1.add(lblJabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 180, -1));
+        jPanel1.add(lblJabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 180, -1));
 
         lblNama.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblNama.setForeground(new java.awt.Color(255, 255, 255));
         lblNama.setText("jLabel3");
-        jPanel1.add(lblNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 190, -1));
+        jPanel1.add(lblNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 190, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nama      :");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 80, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 80, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -179,14 +148,9 @@ public class profil extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblJabatan;
     private javax.swing.JLabel lblNama;
-    private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUsername;
     // End of variables declaration//GEN-END:variables
 }

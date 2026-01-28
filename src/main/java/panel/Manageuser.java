@@ -50,6 +50,8 @@ public class Manageuser extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
+        jPanel2.setBackground(new java.awt.Color(0, 0, 102));
+
         btnAdd.setBackground(new java.awt.Color(0, 153, 255));
         btnAdd.setFont(new java.awt.Font("Tw Cen MT", 1, 14)); // NOI18N
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));

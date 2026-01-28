@@ -48,12 +48,16 @@ public class ProdukTerjual extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(0, 0, 102));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("LAPORAN PRODUK TERJUAL");
 
         spnMulai.setModel(new javax.swing.SpinnerDateModel());
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("S/D");
 
         spnAkhir.setModel(new javax.swing.SpinnerDateModel());
@@ -66,6 +70,7 @@ public class ProdukTerjual extends javax.swing.JPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Masukkan Tanggal");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(

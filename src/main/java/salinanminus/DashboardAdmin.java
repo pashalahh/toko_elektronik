@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import panel.Manageuser;
 import panel.Manageproduk;
 import konektor.pegawai;
-import konektor.produk;
 import dialogs.profil;
 
 /**

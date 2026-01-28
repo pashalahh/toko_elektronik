@@ -57,9 +57,11 @@ refreshDataProduk("");
 
         setLayout(new java.awt.BorderLayout());
 
+        jPanel1.setBackground(new java.awt.Color(0, 0, 102));
+
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Viner Hand ITC", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel1.setForeground(new java.awt.Color(153, 153, 255));
         jLabel1.setText("Manage Produk");
 
         btnTambah.setBackground(new java.awt.Color(0, 153, 255));

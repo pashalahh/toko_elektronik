@@ -104,7 +104,7 @@ public class struk extends javax.swing.JDialog {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("TERIMAKASIH ATAS KEDATANGAN ANDA");
+        jLabel9.setText("TERIMAKASIH DAN SILAHKAN DATANG KEMBALI");
 
         lblBayar.setText("jLabel10");
 

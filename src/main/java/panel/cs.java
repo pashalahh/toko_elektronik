@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import konektor.koneksi;
-import konektor.produk;
 import konektor.pegawai;
 import dialogs.struk;
 
@@ -461,35 +460,31 @@ public class cs extends javax.swing.JPanel {
     
     
 
-    // AMBIL NILAI
-    double total = Double.parseDouble(txtTotal.getText());
-    double bayar = Double.parseDouble(txtBayar.getText());
-    double kembali = Double.parseDouble(txtKembali.getText());
-    
-    simpanTransaksi(total, bayar, kembali);
-
-    // TAMPILKAN STRUK (SEBELUM DIRESET)
-    struk dialogStruk = new struk(null, true);
-    dialogStruk.setDataStruk(
-        txtIdTransaksi.getText(),
-        jLabelTanggal.getText(),
-        lblKasir.getText(),
-        jTableKeranjang.getModel(),
-        total,
-        bayar,
-        kembali
-    );
-    dialogStruk.setVisible(true);
-
-    // RESET SETELAH STRUK DITUTUP
-    modelKeranjang.setRowCount(0);
-    txtTotal.setText("");
-    txtBayar.setText("");
-    txtKembali.setText("");
-    txtQty.setText("");
-
+    // AMBIL NILAI 
+    double total = Double.parseDouble(txtTotal.getText()); 
+    double bayar = Double.parseDouble(txtBayar.getText()); 
+    double kembali = Double.parseDouble(txtKembali.getText()); 
+    simpanTransaksi(total, bayar, kembali); 
+    // TAMPILKAN STRUK (SEBELUM DIRESET) 
+    struk dialogStruk = new struk(null, true); 
+    dialogStruk.setDataStruk( 
+            txtIdTransaksi.getText(), 
+            jLabelTanggal.getText(), 
+            lblKasir.getText(), 
+            jTableKeranjang.getModel(), 
+            total, 
+            bayar, 
+            kembali 
+    ); 
+    dialogStruk.setVisible(true); 
+    // RESET SETELAH STRUK DITUTUP 
+    modelKeranjang.setRowCount(0); 
+    txtTotal.setText(""); 
+    txtBayar.setText(""); 
+    txtKembali.setText(""); 
+    txtQty.setText(""); 
     loadProduk(""); 
-    setTanggalDanId();
+    setTanggalDanId(); 
 
     }//GEN-LAST:event_btnChekoutActionPerformed
 

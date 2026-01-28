@@ -59,7 +59,7 @@ public class RiwayarTransaksi extends javax.swing.JPanel {
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(153, 0, 204));
+        jLabel1.setForeground(new java.awt.Color(153, 153, 255));
         jLabel1.setText("RIWAYAT TRANSAKSI");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

@@ -91,7 +91,7 @@ public class AddNewUser extends javax.swing.JDialog {
         });
         jPanel1.add(txtNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 240, -1));
 
-        txtJabatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Kasir" }));
+        txtJabatan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Kasir", "Manager" }));
         jPanel1.add(txtJabatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 240, -1));
 
         txtUsername.addActionListener(new java.awt.event.ActionListener() {

@@ -61,7 +61,7 @@ public class Lpr extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(51, 153, 255));
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 153, 255));
+        jLabel1.setForeground(new java.awt.Color(153, 153, 255));
         jLabel1.setText("LAPORAN KEUANGAN");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
